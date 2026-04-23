@@ -1,5 +1,9 @@
 <template>
   <header class="document-header">
+    <div class="document-header__logo-wrap">
+      <img class="document-header__logo" src="@/assets/provider-logo.svg" alt="Provider logo" />
+    </div>
+
     <div class="document-header__provider">
       <h1 class="document-header__provider-name">{{ record.Record.Provider.Name }}</h1>
       <div class="document-header__provider-details">
@@ -68,8 +72,21 @@ function trimAddress(address: string): string {
   display: flex;
   gap: var(--spacing-md);
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-start;
   margin-bottom: var(--spacing-lg);
+}
+
+.document-header__logo-wrap {
+  flex-shrink: 0;
+  width: 16mm;
+  display: flex;
+  align-items: flex-start;
+}
+
+.document-header__logo {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .document-header__provider {
