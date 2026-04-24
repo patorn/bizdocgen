@@ -32,6 +32,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { GristRecord } from '../types/document-schema'
 
 interface Props {
@@ -40,7 +41,9 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const paymentMethod = props.record.Record.Payment_Method
+const paymentMethod = computed(() => {
+  return props.record.Record.Payment_Method
+})
 </script>
 
 <style>
