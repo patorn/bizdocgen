@@ -6,6 +6,7 @@ import { configDefaults, defineConfig } from 'vite-plus'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: process.env.GITHUB_PAGES === 'true' ? '/bizdocgen/' : '/',
   lint: {
     plugins: ['oxc', 'typescript', 'unicorn', 'react', 'vue'],
     categories: {
