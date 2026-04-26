@@ -150,6 +150,13 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
             Quantity: 1,
             Unit_Price: 48000, // ~1 day
             Total: 48000,
+            Catalog_Ref: {
+              Type: 'service',
+              Code: 'SVC-CLOUD-001',
+              Name: 'Cloud Architecture Consulting',
+              Unit_Price: 48000,
+              Description: 'บริการให้คำปรึกษาออกแบบระบบคลาวด์',
+            },
           },
           {
             id: 307,
@@ -158,6 +165,13 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
             Quantity: 1,
             Unit_Price: 48000, // ~1 day
             Total: 48000,
+            Catalog_Ref: {
+              Type: 'service',
+              Code: null,
+              Name: 'DevOps Deployment Training',
+              Unit_Price: 48000,
+              Description: null,
+            },
           },
         ],
         Number: 'QT-2025-0042',
@@ -347,6 +361,13 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
             Quantity: 2,
             Unit_Price: 12000, // ~2h each
             Total: 24000,
+            Catalog_Ref: {
+              Type: 'service',
+              Code: 'SVC-INST-001',
+              Name: 'Printer Installation',
+              Unit_Price: 12000,
+              Description: 'ติดตั้งและตั้งค่าปริ้นเตอร์',
+            },
           },
           {
             id: 317,
@@ -355,6 +376,13 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
             Quantity: 1,
             Unit_Price: 6000, // ~1h
             Total: 6000,
+            Catalog_Ref: {
+              Type: 'service',
+              Code: 'SVC-NET-002',
+              Name: 'Network Printer Share Setup',
+              Unit_Price: 6000,
+              Description: 'ลงไดรเวอร์และแชร์ใน LAN',
+            },
           },
         ],
         Number: 'QT-2025-0088',
@@ -394,6 +422,13 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
             Quantity: 1,
             Unit_Price: 24000, // ~4h
             Total: 24000,
+            Catalog_Ref: {
+              Type: 'service',
+              Code: 'SVC-GIT-001',
+              Name: 'Merge Conflict Resolution',
+              Unit_Price: 24000,
+              Description: 'บริการแก้ไข Merge Conflict ระดับวิกฤต',
+            },
           },
           {
             id: 319,
@@ -402,6 +437,13 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
             Quantity: 1,
             Unit_Price: 12000, // ~2h
             Total: 12000,
+            Catalog_Ref: {
+              Type: 'service',
+              Code: 'SVC-GIT-002',
+              Name: 'Git Branch Recovery & Cherry-pick',
+              Unit_Price: 12000,
+              Description: null,
+            },
           },
         ],
         Number: 'RCPT-2025-0112',
@@ -570,6 +612,13 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
             Quantity: 1,
             Unit_Price: 18000, // ~3h
             Total: 18000,
+            Catalog_Ref: {
+              Type: 'service',
+              Code: 'SVC-DEV-003',
+              Name: 'Automation Script Development',
+              Unit_Price: 18000,
+              Description: 'พัฒนาสคริปต์อัตโนมัติตามความต้องการ',
+            },
           },
           {
             id: 327,
@@ -578,6 +627,13 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
             Quantity: 1,
             Unit_Price: 48000, // ~1 day
             Total: 48000,
+            Catalog_Ref: {
+              Type: 'service',
+              Code: 'SVC-TRAIN-001',
+              Name: 'Developer Workshop (1 Day)',
+              Unit_Price: 48000,
+              Description: 'เวิร์กช็อปพัฒนาทีม Git & Code Review',
+            },
           },
         ],
         Number: 'QT-2025-0101',

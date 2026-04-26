@@ -14,8 +14,20 @@ def serialize_provider(provider):
         "Tax_ID": provider.Tax_ID,
     }
 
+def serialize_catalog(catalog):
+    if not catalog:
+        return None
+    return {
+        "Type": catalog.Type,
+        "Code": catalog.Code or None,
+        "Name": catalog.Name,
+        "Unit_Price": catalog.Unit_Price if catalog.Unit_Price is not None else None,
+        "Description": catalog.Description or None,
+    }
+
 def serialize_item(item):
     return {
+        "Catalog_Ref": serialize_catalog(item.Catalog_Ref) if item.Catalog_Ref else None,
         "Description": item.Description,
         "Manual_Sort": item.Manual_Sort or None,
         "Quantity": item.Quantity,
@@ -34,6 +46,20 @@ def serialize_payment_method(pm):
         "Branch": pm.Branch or None,
         "Name": pm.Name,
         "PromptPay": pm.PromptPay or None,
+    }
+
+def serialize_vehicle(vehicle):
+    if not vehicle:
+        return None
+    return {
+        "Make": vehicle.Make,
+        "Model": vehicle.Model,
+        "Year": vehicle.Year,
+        "Color": vehicle.Color or None,
+        "VIN": vehicle.VIN or None,
+        "License_Plate": vehicle.License_Plate or None,
+        "Mileage": vehicle.Mileage if vehicle.Mileage is not None else None,
+        "Engine_Number": vehicle.Engine_Number or None,
     }
 
 def serialize_reference(ref):
@@ -57,4 +83,5 @@ def serialize_record(doc):
         "Remarks": doc.Remarks or None,
         "Signed_Document_URL": doc.Signed_Document_URL or None,
         "Tax": doc.Tax,
+        "Vehicle": serialize_vehicle(doc.Vehicle) if doc.Vehicle else None,
     }

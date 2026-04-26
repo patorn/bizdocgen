@@ -23,7 +23,18 @@ export const ProviderSchema = z.object({
   Tax_ID: z.string(),
 })
 
+export const CatalogTypeSchema = z.enum(['product', 'service', 'document'])
+
+export const CatalogSchema = z.object({
+  Type: CatalogTypeSchema,
+  Code: z.string().nullish(),
+  Name: z.string(),
+  Unit_Price: z.number().nullish(),
+  Description: z.string().nullish(),
+})
+
 export const ItemSchema = z.object({
+  Catalog_Ref: CatalogSchema.nullish(),
   Description: z.string(),
   Manual_Sort: z.number().nullish(),
   Quantity: z.number(),
@@ -80,6 +91,8 @@ export const GristRecordSchema = z.object({
 export type PaymentMethod = z.infer<typeof PaymentMethodSchema>
 export type Client = z.infer<typeof ClientSchema>
 export type Provider = z.infer<typeof ProviderSchema> // includes Personnel_Name
+export type CatalogType = z.infer<typeof CatalogTypeSchema>
+export type Catalog = z.infer<typeof CatalogSchema>
 export type Item = z.infer<typeof ItemSchema>
 export type Vehicle = z.infer<typeof VehicleSchema>
 export type DocumentType = z.infer<typeof DocumentTypeSchema>

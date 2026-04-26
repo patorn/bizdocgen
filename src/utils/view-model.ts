@@ -20,14 +20,20 @@ export function getViewModel(record: GristRecord): DocumentViewModel {
 
   // Transform items to display format
   const sortedItems = sortItems(record.Record.Items)
-  const items: DisplayItem[] = sortedItems.map((item) => ({
-    id: item.id.toString(),
-    description: item.Description,
-    quantity: item.Quantity,
-    unitPrice: item.Unit_Price,
-    total: item.Total,
-    sortOrder: item.Manual_Sort ?? 0,
-  }))
+  const items: DisplayItem[] = sortedItems.map((item) => {
+    const catalogCode = item.Catalog_Ref?.Code ?? null
+    const description = catalogCode
+      ? `${item.Description} [${catalogCode}]`
+      : item.Description
+    return {
+      id: item.id.toString(),
+      description,
+      quantity: item.Quantity,
+      unitPrice: item.Unit_Price,
+      total: item.Total,
+      sortOrder: item.Manual_Sort ?? 0,
+    }
+  })
 
   // Calculate financial totals
   const subtotal = calculateSubtotal(record.Record.Items)
