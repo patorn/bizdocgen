@@ -169,6 +169,16 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Personnel_Name: 'นาย โปร แก้ได้หมด',
           Tax_ID: '1234567890123',
         },
+        Vehicle: {
+          Make: 'Toyota',
+          Model: 'Corolla Cross',
+          Year: 2023,
+          Color: 'White Pearl',
+          VIN: 'MR2KZ1234P0001234',
+          License_Plate: '4กข 1234',
+          Mileage: 32500,
+          Engine_Number: '2ZR-FBE-987654',
+        },
         Reference: null,
         Remarks:
           '### หมายเหตุ\nใบเสนอราคานี้มีอายุ 30 วัน\n\n> หมายเหตุ: ถ้าลูกค้าหัวเราะระหว่างอบรม แปลว่าเข้าใจแล้ว',

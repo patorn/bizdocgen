@@ -12,7 +12,10 @@
   >
     <DocumentHeader v-if="record" :record="record" />
 
-    <ClientInfo v-if="record" :record="record" />
+    <div class="document__client-vehicle">
+      <ClientInfo v-if="record" :record="record" />
+      <VehicleInfo v-if="record" :record="record" />
+    </div>
 
     <ItemsTable v-if="record" :record="record" />
 
@@ -33,6 +36,7 @@
 import { computed } from 'vue'
 import type { GristRecord } from '../types/document-schema'
 import ClientInfo from './ClientInfo.vue'
+import VehicleInfo from './VehicleInfo.vue'
 import DocumentHeader from './DocumentHeader.vue'
 import ItemsTable from './ItemsTable.vue'
 import PaymentInfo from './PaymentInfo.vue'
@@ -98,6 +102,13 @@ const paymentMethodName = computed(() => {
     box-shadow: var(--document-shadow);
     zoom: var(--document-scale);
   }
+}
+
+.document__client-vehicle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+  align-items: start;
 }
 
 .document__payment-section {

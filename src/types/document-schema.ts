@@ -32,6 +32,17 @@ export const ItemSchema = z.object({
   id: z.number(),
 })
 
+export const VehicleSchema = z.object({
+  Make: z.string(),
+  Model: z.string(),
+  Year: z.number(),
+  Color: z.string().nullish(),
+  VIN: z.string().nullish(),
+  License_Plate: z.string().nullish(),
+  Mileage: z.number().nullish(),
+  Engine_Number: z.string().nullish(),
+})
+
 export const DocumentTypeSchema = z.enum(['Quotation', 'Invoice', 'Receipt'])
 
 export const DocumentTypeListSchema = z.preprocess((value) => {
@@ -57,6 +68,7 @@ export const RecordDataSchema = z.object({
   Remarks: z.string().nullish(),
   Tax: z.number(),
   Signed_Document_URL: z.union([z.url(), z.literal('')]).nullish(),
+  Vehicle: VehicleSchema.nullish(),
 })
 
 export const GristRecordSchema = z.object({
@@ -69,6 +81,7 @@ export type PaymentMethod = z.infer<typeof PaymentMethodSchema>
 export type Client = z.infer<typeof ClientSchema>
 export type Provider = z.infer<typeof ProviderSchema> // includes Personnel_Name
 export type Item = z.infer<typeof ItemSchema>
+export type Vehicle = z.infer<typeof VehicleSchema>
 export type DocumentType = z.infer<typeof DocumentTypeSchema>
 export type Reference = z.infer<typeof ReferenceSchema>
 export type RecordData = z.infer<typeof RecordDataSchema>
