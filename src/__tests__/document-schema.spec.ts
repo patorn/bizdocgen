@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vite-plus/test'
 
-import { GristRecordSchema } from '../types/document-schema'
+import { GristRecordSchema, PaymentRecordSchema } from '../types/document-schema'
 
 function createRecord(documentType: unknown) {
   return {
@@ -68,5 +68,86 @@ describe('GristRecordSchema', () => {
     const parsed = GristRecordSchema.parse(createRecord('Credit Note'))
 
     expect(parsed.Record.Document_Type).toEqual(['Credit Note'])
+  })
+})
+
+describe('PaymentRecordSchema', () => {
+  it('parses a Cash payment record with only required fields', () => {
+    const result = PaymentRecordSchema.safeParse({
+      Type: 'Cash',
+      Amount: 5000,
+      Datetime: '2025-07-21T09:00:00.000Z',
+    })
+
+    expect(result.success).toBe(true)
+    if (result.success) {
+      expect(result.data.Type).toBe('Cash')
+      expect(result.data.Amount).toBe(5000)
+    }
+  })
+
+  it('parses a Cheque payment record with all fields', () => {
+    const result = PaymentRecordSchema.safeParse({
+      Type: 'Cheque',
+      Amount: 10000,
+      Datetime: '2025-07-21T09:00:00.000Z',
+      Bank: 'ธนาคารกรุงเทพ',
+      Branch: 'สีลม',
+      Transaction_Number: 'CHQ-001',
+    })
+
+    expect(result.success).toBe(true)
+    if (result.success) {
+      expect(result.data.Transaction_Number).toBe('CHQ-001')
+    }
+  })
+
+  it('parses a Credit Card payment record', () => {
+    const result = PaymentRecordSchema.safeParse({
+      Type: 'Credit Card',
+      Amount: 8500,
+      Datetime: '2025-07-21T10:00:00.000Z',
+      Card_Type: 'Mastercard',
+    })
+
+    expect(result.success).toBe(true)
+    if (result.success) {
+      expect(result.data.Card_Type).toBe('Mastercard')
+    }
+  })
+
+  it('parses a Bank Transfer payment record', () => {
+    const result = PaymentRecordSchema.safeParse({
+      Type: 'Bank Transfer',
+      Amount: 20000,
+      Datetime: '2025-07-22T08:00:00.000Z',
+      Bank: 'ธนาคารไทยพาณิชย์',
+      Branch: 'เซ็นทรัลเวิลด์',
+      Account_Number: '111-1-11111-1',
+    })
+
+    expect(result.success).toBe(true)
+    if (result.success) {
+      expect(result.data.Account_Number).toBe('111-1-11111-1')
+    }
+  })
+
+  it('rejects an unknown payment type', () => {
+    const result = PaymentRecordSchema.safeParse({
+      Type: 'Crypto',
+      Amount: 500,
+      Datetime: '2025-07-22T08:00:00.000Z',
+    })
+
+    expect(result.success).toBe(false)
+  })
+
+  it('rejects a record missing Amount', () => {
+    const result = PaymentRecordSchema.safeParse({
+      Type: 'Cash',
+      Datetime: '2025-07-22T08:00:00.000Z',
+    })
+
+    expect(result.success).toBe(false)
   })
 })

@@ -21,6 +21,8 @@
 
     <TaxSummary v-if="record" :record="record" />
 
+    <PaymentRecords v-if="record?.Record.Payments?.length" :record="record" />
+
     <RemarksSection v-if="record" :record="record" />
 
     <div v-if="record?.Record.Payment_Method" class="document__payment-section">
@@ -40,6 +42,7 @@ import VehicleInfo from './VehicleInfo.vue'
 import DocumentHeader from './DocumentHeader.vue'
 import ItemsTable from './ItemsTable.vue'
 import PaymentInfo from './PaymentInfo.vue'
+import PaymentRecords from './PaymentRecords.vue'
 import QRCodeSection from './QRCodeSection.vue'
 import RemarksSection from './RemarksSection.vue'
 import SignatureArea from './SignatureArea.vue'

@@ -69,6 +69,21 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
         Remarks:
           '### หมายเหตุ\nขอบคุณที่เรียกใช้บริการรอบดึก — ระบบกลับมานิ่งแล้ว ✅\n\n> Tip: โปรดอย่ากด kubectl delete all อีกนะครับ',
         Tax: 0.07,
+        Payments: [
+          {
+            Type: 'Bank Transfer',
+            Amount: 20000,
+            Datetime: '2025-07-21T09:30:00.000Z',
+            Bank: 'ธนาคารไทยพาณิชย์',
+            Branch: 'เซ็นทรัลเวิลด์',
+            Account_Number: '111-1-11111-1',
+          },
+          {
+            Type: 'Cash',
+            Amount: 17185.2,
+            Datetime: '2025-07-21T14:00:00.000Z',
+          },
+        ],
       },
     },
   },
@@ -125,6 +140,22 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
         },
         Remarks: '### หมายเหตุ\nกรุณาหักภาษี ณ ที่จ่าย 3% และแนบหนังสือรับรอง',
         Tax: -0.03,
+        Payments: [
+          {
+            Type: 'Cheque',
+            Amount: 15000,
+            Datetime: '2025-06-15T10:00:00.000Z',
+            Bank: 'ธนาคารกรุงเทพ',
+            Branch: 'สีลม',
+            Transaction_Number: 'CHQ-0034521',
+          },
+          {
+            Type: 'Credit Card',
+            Amount: 14100,
+            Datetime: '2025-06-15T11:30:00.000Z',
+            Card_Type: 'Visa',
+          },
+        ],
       },
     },
   },

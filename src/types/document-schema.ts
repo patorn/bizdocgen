@@ -66,6 +66,23 @@ export const ReferenceSchema = z
   })
   .nullish()
 
+export const PaymentTypeSchema = z.enum(['Cash', 'Cheque', 'Credit Card', 'Bank Transfer'])
+
+export const PaymentRecordSchema = z.object({
+  Type: PaymentTypeSchema,
+  Amount: z.number(),
+  Datetime: z.string(),
+  // Cheque + Bank Transfer
+  Bank: z.string().nullish(),
+  Branch: z.string().nullish(),
+  // Cheque only
+  Transaction_Number: z.string().nullish(),
+  // Credit Card only
+  Card_Type: z.string().nullish(),
+  // Bank Transfer only
+  Account_Number: z.string().nullish(),
+})
+
 export const RecordDataSchema = z.object({
   Client: ClientSchema,
   Credit_Term: z.string().nullish(),
@@ -74,6 +91,7 @@ export const RecordDataSchema = z.object({
   Items: z.array(ItemSchema),
   Number: z.string(),
   Payment_Method: PaymentMethodSchema.nullish(),
+  Payments: z.array(PaymentRecordSchema).nullish(),
   Provider: ProviderSchema,
   Reference: ReferenceSchema,
   Remarks: z.string().nullish(),
@@ -97,5 +115,7 @@ export type Item = z.infer<typeof ItemSchema>
 export type Vehicle = z.infer<typeof VehicleSchema>
 export type DocumentType = z.infer<typeof DocumentTypeSchema>
 export type Reference = z.infer<typeof ReferenceSchema>
+export type PaymentType = z.infer<typeof PaymentTypeSchema>
+export type PaymentRecord = z.infer<typeof PaymentRecordSchema>
 export type RecordData = z.infer<typeof RecordDataSchema>
 export type GristRecord = z.infer<typeof GristRecordSchema>
