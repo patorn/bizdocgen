@@ -54,7 +54,7 @@ export const VehicleSchema = z.object({
   Engine_Number: z.string().nullish(),
 })
 
-export const DocumentTypeSchema = z.enum(['Quotation', 'Invoice', 'Receipt'])
+export const DocumentTypeSchema = z.enum(['Quotation', 'Invoice', 'Receipt', 'Credit Note'])
 
 export const DocumentTypeListSchema = z.preprocess((value) => {
   return Array.isArray(value) ? value : [value]

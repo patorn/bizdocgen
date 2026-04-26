@@ -63,4 +63,10 @@ describe('GristRecordSchema', () => {
 
     expect(result.success).toBe(false)
   })
+
+  it('accepts Credit Note as a valid Document_Type', () => {
+    const parsed = GristRecordSchema.parse(createRecord('Credit Note'))
+
+    expect(parsed.Record.Document_Type).toEqual(['Credit Note'])
+  })
 })

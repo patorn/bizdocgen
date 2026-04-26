@@ -690,4 +690,54 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
       },
     },
   },
+  {
+    title: 'ใบลดหนี้ VAT 7% — คืนเงินบางส่วน (Helm chart ถูกยกเลิก)',
+    slug: 'credit-note-helm-partial-refund',
+    data: {
+      id: 200,
+      Record: {
+        Client: {
+          Address: '88/88 ชั้น 42 ตึกคลาวด์ซุปเปอร์ทาวเวอร์\nแขวงควันไฟ เขตดาต้า กรุงเทพฯ 10330',
+          Name: 'บริษัท กลุ่มเมฆมันส์ จำกัด',
+          Tax_ID: '9781234567890',
+        },
+        Date: '2025-07-28T00:00:00.000Z',
+        Document_Type: ['Credit Note'],
+        Items: [
+          {
+            id: 401,
+            Description:
+              'คืนค่าติดตั้ง Helm chart — ยกเลิกการใช้งาน cluster ก่อนครบกำหนด\n*(อ้างอิงรายการที่ 2 ใน RCPT-2025-0001)*',
+            Manual_Sort: 1,
+            Quantity: 1,
+            Unit_Price: -12000,
+            Total: -12000,
+          },
+          {
+            id: 402,
+            Description: 'คืนค่ากาแฟดำดริปพิเศษ (ยกเลิกออร์เดอร์ก่อนดริป)',
+            Manual_Sort: 2,
+            Quantity: 3,
+            Unit_Price: -120,
+            Total: -360,
+          },
+        ],
+        Number: 'CN-2025-0001',
+        Payment_Method: null,
+        Provider: {
+          Address: '123 ถนนแก้ปัญหา แขวงช่างกล เขตทุกจังหวัด\nราชอาณาจักรไทย 10000',
+          Email: 'hero@fixall.th',
+          Name: 'ฟรีแลนซ์แก้ปัญหาทั่วราชอาณาจักร',
+          Personnel_Name: 'นาย โปร แก้ได้หมด',
+          Tax_ID: '1234567890123',
+        },
+        Reference: {
+          Number: 'RCPT-2025-0001',
+        },
+        Remarks:
+          '### หมายเหตุ\nใบลดหนี้นี้ออกเพื่อลดมูลค่าตามใบเสร็จ RCPT-2025-0001\n\n> ยอดที่คืนจะโอนกลับภายใน 5 วันทำการ',
+        Tax: 0.07,
+      },
+    },
+  },
 ]

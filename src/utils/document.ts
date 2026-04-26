@@ -16,6 +16,8 @@ export function getDocumentTypeInThai(type: DocumentType): string {
       return 'ใบแจ้งหนี้'
     case 'Receipt':
       return 'ใบเสร็จรับเงิน'
+    case 'Credit Note':
+      return 'ใบลดหนี้'
     default:
       return type
   }
