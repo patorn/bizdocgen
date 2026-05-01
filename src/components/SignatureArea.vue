@@ -17,7 +17,20 @@
       </div>
     </div>
 
-    <!-- Invoice & Receipt: Single signature on right -->
+    <!-- Receipt: Customer + ผู้รับเงิน -->
+    <div v-else-if="isReceipt" class="signature__grid">
+      <div class="signature__section">
+        <div class="signature__text">ลงชื่อผู้ชำระเงิน</div>
+        <div class="signature__line"></div>
+      </div>
+      <div class="signature__section">
+        <div class="signature__text">ผู้รับเงิน</div>
+        <div class="signature__line"></div>
+        <div class="signature__name">{{ displayName }}</div>
+      </div>
+    </div>
+
+    <!-- Invoice: Single signature on right -->
     <div v-else class="signature__single">
       <div class="signature__section signature__section--right">
         <div class="signature__text">ลงชื่อ</div>
@@ -40,6 +53,10 @@ const props = defineProps<Props>()
 
 const isQuotation = computed(() => {
   return props.record.Record.Document_Type.includes('Quotation')
+})
+
+const isReceipt = computed(() => {
+  return props.record.Record.Document_Type.includes('Receipt')
 })
 
 const displayName = computed(() => {
