@@ -66,6 +66,62 @@ vp dev
 
 MIT
 
+## Adding Fields to the Document View
+
+The document data flows from Grist → the widget through a Python formula column and a Zod schema. To add a new field, you must update both.
+
+### 1. Update the Grist formula column (`document-schema-formula.py`)
+
+The Python formula in Grist serialises each record into a JSON object. Edit the relevant `serialize_*` function in [`src/types/document-schema-formula.py`](src/types/document-schema-formula.py) to include your new field, then paste the updated file contents into the Grist formula column.
+
+**Example** — adding `Fax` to the provider:
+
+```python
+def serialize_provider(provider):
+    return {
+        "Address": provider.Address,
+        "Email": provider.Email or None,
+        "Fax": provider.Fax or None,        # ← new field
+        "Name": provider.Name,
+        "Personnel_Name": provider.Personnel_Name or None,
+        "Tax_ID": provider.Tax_ID,
+    }
+```
+
+### 2. Update the Zod schema (`document-schema.ts`)
+
+Add the corresponding field to the matching schema in [`src/types/document-schema.ts`](src/types/document-schema.ts) so the widget validates and types it correctly.
+
+```typescript
+export const ProviderSchema = z.object({
+  Address: z.string(),
+  Email: z.string().nullish(),
+  Fax: z.string().nullish(),   // ← new field
+  Name: z.string(),
+  Personnel_Name: z.string().nullish(),
+  Tax_ID: z.string(),
+})
+```
+
+TypeScript types are derived automatically from the schemas (`z.infer<typeof ProviderSchema>`), so no separate type update is needed.
+
+### 3. Use the field in a component
+
+The validated record is available as `RecordData` throughout the Vue components. Reference the new field in the relevant component under `src/components/`.
+
+### Field reference by schema
+
+| Schema | File location | Grist table |
+|---|---|---|
+| `RecordDataSchema` | `document-schema.ts` | Documents table (top-level fields) |
+| `ClientSchema` | `document-schema.ts` | Clients table |
+| `ProviderSchema` | `document-schema.ts` | Providers table |
+| `ItemSchema` | `document-schema.ts` | Items table |
+| `VehicleSchema` | `document-schema.ts` | Vehicles table |
+| `PaymentMethodSchema` | `document-schema.ts` | Payment Methods table |
+| `PaymentRecordSchema` | `document-schema.ts` | Payments table |
+| `CatalogSchema` | `document-schema.ts` | Catalog table |
+
 ## Related Documentation
 
 - [Vite+ Guide](https://viteplus.dev/guide/)
