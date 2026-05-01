@@ -20,19 +20,21 @@
           data-testid="payment-record-row"
         >
           <td class="payment-records__cell payment-records__cell--number">{{ index + 1 }}</td>
-          <td class="payment-records__cell payment-records__cell--type">{{ payment.Type }}</td>
+          <td class="payment-records__cell payment-records__cell--type">
+            {{ getPaymentTypeLabel(payment.Type) }}
+          </td>
           <td class="payment-records__cell payment-records__cell--datetime">
             {{ formatDatetime(payment.Datetime) }}
           </td>
           <td class="payment-records__cell payment-records__cell--details">
             <template v-if="payment.Type === 'Cheque'">
-              ธนาคาร{{ payment.Bank }} สาขา{{ payment.Branch }} เลขที่เช็ค {{ payment.Transaction_Number }}
+              ธนาคาร {{ payment.Bank }} สาขา {{ payment.Branch }} เลขที่เช็ค {{ payment.Transaction_Number }}
             </template>
             <template v-else-if="payment.Type === 'Credit Card'">
               {{ payment.Card_Type }}
             </template>
             <template v-else-if="payment.Type === 'Bank Transfer'">
-              ธนาคาร{{ payment.Bank }} สาขา{{ payment.Branch }} บัญชี {{ payment.Account_Number }}
+              ธนาคาร {{ payment.Bank }} สาขา {{ payment.Branch }} บัญชี {{ payment.Account_Number }}
             </template>
           </td>
           <td class="payment-records__cell payment-records__cell--amount">
@@ -67,6 +69,13 @@ import type { GristRecord } from '../types/document-schema'
 import { formatCurrency } from '../utils/currency'
 import { getViewModel } from '../utils/view-model'
 
+const paymentTypeLabels: Record<string, string> = {
+  Cash: 'เงินสด',
+  Cheque: 'เช็ค',
+  'Credit Card': 'บัตรเครดิต',
+  'Bank Transfer': 'โอนผ่านธนาคาร',
+}
+
 interface Props {
   record: GristRecord
 }
@@ -80,6 +89,10 @@ const totalPaid = computed(() => payments.value.reduce((sum, p) => sum + p.Amoun
 const documentTotal = computed(() => getViewModel(props.record).total)
 
 const balance = computed(() => documentTotal.value - totalPaid.value)
+
+function getPaymentTypeLabel(type: string): string {
+  return paymentTypeLabels[type] ?? type
+}
 
 function formatDatetime(datetime: string): string {
   return new Date(datetime).toLocaleString('th-TH', {
