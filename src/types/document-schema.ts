@@ -52,6 +52,8 @@ export const VehicleSchema = z.object({
   License_Plate: z.string().nullish(),
   Mileage: z.number().nullish(),
   Engine_Number: z.string().nullish(),
+  Purchase_Order_Number: z.string().nullish(),
+  Sales_Order_Number: z.string().nullish(),
 })
 
 export const DocumentTypeSchema = z.enum(['Quotation', 'Invoice', 'Receipt', 'Credit Note'])

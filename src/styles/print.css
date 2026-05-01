@@ -2,7 +2,7 @@
 
 @page {
   size: A4;
-  margin: 0;
+  margin: 20mm;
 }
 
 /* Print-specific styles */
@@ -11,6 +11,12 @@
     -webkit-print-color-adjust: exact !important;
     color-adjust: exact !important;
     print-color-adjust: exact !important;
+  }
+
+  /* @page margins handle all page spacing — remove document padding to avoid
+     double-spacing on page 1 and no spacing on subsequent pages */
+  .document {
+    padding: 0 !important;
   }
 
   #vue-inspector-container,

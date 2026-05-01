@@ -223,6 +223,8 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           License_Plate: '4กข 1234',
           Mileage: 32500,
           Engine_Number: '2ZR-FBE-987654',
+          Purchase_Order_Number: 'PO-2023-00456',
+          Sales_Order_Number: 'SO-2023-00789',
         },
         Reference: null,
         Remarks:
