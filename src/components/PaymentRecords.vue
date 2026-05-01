@@ -73,7 +73,7 @@ const paymentTypeLabels: Record<string, string> = {
   Cash: 'เงินสด',
   Cheque: 'เช็ค',
   'Credit Card': 'บัตรเครดิต',
-  'Bank Transfer': 'โอนผ่านธนาคาร',
+  'Bank Transfer': 'โอนเงิน',
 }
 
 interface Props {

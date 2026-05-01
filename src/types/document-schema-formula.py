@@ -48,6 +48,18 @@ def serialize_payment_method(pm):
         "PromptPay": pm.PromptPay or None,
     }
 
+def serialize_payment(payment):
+    return {
+        "Type": payment.Type,
+        "Amount": payment.Amount,
+        "Datetime": str(payment.Datetime) if payment.Datetime else "",
+        "Bank": payment.Bank or None,
+        "Branch": payment.Branch or None,
+        "Transaction_Number": payment.Transaction_Number or None,
+        "Card_Type": payment.Card_Type or None,
+        "Account_Number": payment.Account_Number or None,
+    }
+
 def serialize_vehicle(vehicle):
     if not vehicle:
         return None
@@ -60,6 +72,8 @@ def serialize_vehicle(vehicle):
         "License_Plate": vehicle.License_Plate or None,
         "Mileage": vehicle.Mileage if vehicle.Mileage is not None else None,
         "Engine_Number": vehicle.Engine_Number or None,
+        "Purchase_Order_Number": vehicle.Purchase_Order_Number or None,
+        "Sales_Order_Number": vehicle.Sales_Order_Number or None,
     }
 
 def serialize_reference(ref):
@@ -78,6 +92,7 @@ def serialize_record(doc):
         "Items": [serialize_item(item) for item in doc.Items],
         "Number": doc.Number,
         "Payment_Method": serialize_payment_method(doc.Payment_Method),
+        "Payments": [serialize_payment(payment) for payment in doc.Payments] if doc.Payments else None,
         "Provider": serialize_provider(doc.Provider),
         "Reference": serialize_reference(doc.Reference),
         "Remarks": doc.Remarks or None,
@@ -85,3 +100,5 @@ def serialize_record(doc):
         "Tax": doc.Tax,
         "Vehicle": serialize_vehicle(doc.Vehicle) if doc.Vehicle else None,
     }
+
+return serialize_record(rec)
