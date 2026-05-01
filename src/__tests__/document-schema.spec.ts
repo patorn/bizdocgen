@@ -80,10 +80,12 @@ describe('PaymentRecordSchema', () => {
     })
 
     expect(result.success).toBe(true)
-    if (result.success) {
-      expect(result.data.Type).toBe('Cash')
-      expect(result.data.Amount).toBe(5000)
+    if (!result.success) {
+      throw new Error('Expected Cash payment record to parse successfully')
     }
+
+    expect(result.data.Type).toBe('Cash')
+    expect(result.data.Amount).toBe(5000)
   })
 
   it('parses a Cheque payment record with all fields', () => {
@@ -97,9 +99,11 @@ describe('PaymentRecordSchema', () => {
     })
 
     expect(result.success).toBe(true)
-    if (result.success) {
-      expect(result.data.Transaction_Number).toBe('CHQ-001')
+    if (!result.success) {
+      throw new Error('Expected Cheque payment record to parse successfully')
     }
+
+    expect(result.data.Transaction_Number).toBe('CHQ-001')
   })
 
   it('parses a Credit Card payment record', () => {
@@ -111,9 +115,11 @@ describe('PaymentRecordSchema', () => {
     })
 
     expect(result.success).toBe(true)
-    if (result.success) {
-      expect(result.data.Card_Type).toBe('Mastercard')
+    if (!result.success) {
+      throw new Error('Expected Credit Card payment record to parse successfully')
     }
+
+    expect(result.data.Card_Type).toBe('Mastercard')
   })
 
   it('parses a Bank Transfer payment record', () => {
@@ -127,9 +133,11 @@ describe('PaymentRecordSchema', () => {
     })
 
     expect(result.success).toBe(true)
-    if (result.success) {
-      expect(result.data.Account_Number).toBe('111-1-11111-1')
+    if (!result.success) {
+      throw new Error('Expected Bank Transfer payment record to parse successfully')
     }
+
+    expect(result.data.Account_Number).toBe('111-1-11111-1')
   })
 
   it('rejects an unknown payment type', () => {
