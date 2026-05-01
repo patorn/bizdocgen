@@ -126,15 +126,15 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "📦 Fallback: Download artifacts below if S3 link is unavailable" >> $GITHUB_STEP_SUMMARY
         env:
-          PUBLISH_BUCKET: ghartifacts
+          PUBLISH_BUCKET: ${{ secrets.PUBLISH_BUCKET }}
           PUBLISH_KEY: ${{ github.repository }}/${{ github.run_id }}-${{ github.run_attempt }}
-          REPORT_URL_PREFIX: https://ghartifacts.t3.storage.dev
+          REPORT_URL_PREFIX: ${{ secrets.REPORT_URL_PREFIX }}
           RCLONE_CONFIG_PUBLISH_TYPE: s3
           RCLONE_CONFIG_PUBLISH_PROVIDER: Other
           RCLONE_CONFIG_PUBLISH_REGION: auto
           RCLONE_CONFIG_PUBLISH_ACL: public-read
           RCLONE_CONFIG_PUBLISH_ENDPOINT: https://t3.storage.dev
-          RCLONE_CONFIG_PUBLISH_ACCESS_KEY_ID: tid_cweGkGmDMMfHSUdYAEyGsRExuXHBTmAWVCWfa_XyogdcaaTlBo
+          RCLONE_CONFIG_PUBLISH_ACCESS_KEY_ID: ${{ secrets.RCLONE_CONFIG_PUBLISH_ACCESS_KEY_ID }}
           RCLONE_CONFIG_PUBLISH_SECRET_ACCESS_KEY: ${{ secrets.RCLONE_CONFIG_PUBLISH_SECRET_ACCESS_KEY }}
         if: always() && hashFiles('playwright-report/**/*') != ''
 
