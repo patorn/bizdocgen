@@ -1,6 +1,8 @@
 export interface DisplayItem {
   id: string
   description: string
+  catalogCode: string | null
+  documentCode: string | null
   quantity: number
   unitPrice: number
   total: number

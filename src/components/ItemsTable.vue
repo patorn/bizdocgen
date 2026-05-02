@@ -19,7 +19,17 @@
               class="items-table__description items-table__description--markdown"
               v-html="renderMarkdown(item.description)"
             />
-            <div v-else class="items-table__description">{{ item.description }}</div>
+            <template v-else>
+              <span class="items-table__description">{{ item.description }}</span>
+            </template>
+            <template v-if="item.catalogCode || item.documentCode">
+              <span v-if="item.catalogCode" class="items-table__tag items-table__tag--catalog">
+                รหัสสินค้า: {{ item.catalogCode }}
+              </span>
+              <span v-if="item.documentCode" class="items-table__tag items-table__tag--document">
+                เลขที่เอกสาร: {{ item.documentCode }}
+              </span>
+            </template>
           </td>
           <td class="items-table__cell items-table__cell--quantity">{{ item.quantity }}</td>
           <td class="items-table__cell items-table__cell--unit-price">
@@ -133,5 +143,31 @@ const viewModel = computed(() => {
 
 .items-table__description--markdown li {
   line-height: var(--line-height-tight);
+}
+
+.items-table__tag {
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.items-table__tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--border-default);
+  padding: 1px 8px;
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.items-table__tag--catalog {
+  background-color: var(--bg-gray-50);
+  color: var(--text-secondary);
+}
+
+.items-table__tag--document {
+  background-color: var(--bg-gray-50);
+  color: var(--text-secondary);
 }
 </style>

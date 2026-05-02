@@ -27,7 +27,8 @@ def serialize_catalog(catalog):
 
 def serialize_item(item):
     return {
-        "Catalog_Ref": serialize_catalog(item.Catalog_Ref) if item.Catalog_Ref else None,
+        "Catalog": serialize_catalog(item.Catalog) if item.Catalog else None,
+        "Document_Code": item.Document_Code or None,
         "Description": item.Description,
         "Manual_Sort": item.Manual_Sort or None,
         "Quantity": item.Quantity,

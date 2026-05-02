@@ -21,13 +21,14 @@ export function getViewModel(record: GristRecord): DocumentViewModel {
   // Transform items to display format
   const sortedItems = sortItems(record.Record.Items)
   const items: DisplayItem[] = sortedItems.map((item) => {
-    const catalogCode = item.Catalog_Ref?.Code ?? null
-    const description = catalogCode
-      ? `${item.Description} [${catalogCode}]`
-      : item.Description
+    const catalogCode = item.Catalog?.Code ?? null
+    const documentCode = item.Document_Code ?? null
+    const description = item.Description
     return {
       id: item.id.toString(),
       description,
+      catalogCode,
+      documentCode,
       quantity: item.Quantity,
       unitPrice: item.Unit_Price,
       total: item.Total,

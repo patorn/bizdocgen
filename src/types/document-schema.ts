@@ -23,7 +23,7 @@ export const ProviderSchema = z.object({
   Tax_ID: z.string(),
 })
 
-export const CatalogTypeSchema = z.enum(['product', 'service', 'document'])
+export const CatalogTypeSchema = z.enum(['Product', 'Service'])
 
 export const CatalogSchema = z.object({
   Type: CatalogTypeSchema,
@@ -34,7 +34,8 @@ export const CatalogSchema = z.object({
 })
 
 export const ItemSchema = z.object({
-  Catalog_Ref: CatalogSchema.nullish(),
+  Catalog: CatalogSchema.nullish(),
+  Document_Code: z.string().nullish(),
   Description: z.string(),
   Manual_Sort: z.number().nullish(),
   Quantity: z.number(),
