@@ -83,12 +83,21 @@ def serialize_reference(ref):
         "Number": ref.Number,
     }
 
+def serialize_document_type(document_type):
+    if not document_type:
+        return None
+    return {
+        "Name": document_type.Name,
+        "Abbr": document_type.Abbr or None,
+        "Thai_Name": document_type.Thai_Name or None,
+    }
+
 def serialize_record(doc):
     return {
         "Client": serialize_client(doc.Client),
         "Credit_Term": doc.Credit_Term or None,
         "Date": str(doc.Date) if doc.Date else "",
-        "Document_Type": doc.Document_Type,
+        "Document_Type": serialize_document_type(doc.Document_Type),
         "Items": [serialize_item(item) for item in doc.Items],
         "Number": doc.Number,
         "Payment_Method": serialize_payment_method(doc.Payment_Method),

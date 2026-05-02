@@ -15,7 +15,7 @@ function createRecord(documentType: 'Quotation' | 'Invoice'): GristRecord {
       },
       Credit_Term: null,
       Date: '2025-08-09T00:00:00.000Z',
-      Document_Type: [documentType],
+      Document_Type: { Name: documentType },
       Items: [
         {
           Description: 'Test Item',

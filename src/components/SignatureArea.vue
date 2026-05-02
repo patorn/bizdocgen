@@ -47,6 +47,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { GristRecord } from '../types/document-schema'
+import { getDocumentTypeName } from '../utils/document'
 
 interface Props {
   record: GristRecord
@@ -54,12 +55,16 @@ interface Props {
 
 const props = defineProps<Props>()
 
+const documentTypeName = computed(() => {
+  return getDocumentTypeName(props.record.Record.Document_Type)
+})
+
 const isQuotation = computed(() => {
-  return props.record.Record.Document_Type.includes('Quotation')
+  return documentTypeName.value === 'Quotation'
 })
 
 const isReceipt = computed(() => {
-  return props.record.Record.Document_Type.includes('Receipt')
+  return documentTypeName.value === 'Receipt'
 })
 
 const displayName = computed(() => {

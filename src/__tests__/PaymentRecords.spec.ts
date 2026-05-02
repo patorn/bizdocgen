@@ -15,7 +15,7 @@ function createRecord(payments: GristRecord['Record']['Payments']): GristRecord 
       },
       Credit_Term: null,
       Date: '2025-08-09T00:00:00.000Z',
-      Document_Type: ['Invoice'],
+      Document_Type: { Name: 'Invoice' },
       Items: [
         {
           Description: 'Test Item',

@@ -56,11 +56,13 @@ export const VehicleSchema = z.object({
   Sales_Order_Number: z.string().nullish(),
 })
 
-export const DocumentTypeSchema = z.enum(['Quotation', 'Invoice', 'Receipt', 'Credit Note'])
+export const DocumentTypeNameSchema = z.enum(['Quotation', 'Invoice', 'Receipt', 'Credit Note'])
 
-export const DocumentTypeListSchema = z.preprocess((value) => {
-  return Array.isArray(value) ? value : [value]
-}, z.array(DocumentTypeSchema).length(1))
+export const DocumentTypeSchema = z.object({
+  Name: DocumentTypeNameSchema,
+  Abbr: z.string().nullish(),
+  Thai_Name: z.string().nullish(),
+})
 
 export const ReferenceSchema = z
   .object({
@@ -89,7 +91,7 @@ export const RecordDataSchema = z.object({
   Client: ClientSchema,
   Credit_Term: z.string().nullish(),
   Date: z.string(), // ISO date string
-  Document_Type: DocumentTypeListSchema,
+  Document_Type: DocumentTypeSchema,
   Items: z.array(ItemSchema),
   Number: z.string(),
   Payment_Method: PaymentMethodSchema.nullish(),
@@ -115,6 +117,7 @@ export type CatalogType = z.infer<typeof CatalogTypeSchema>
 export type Catalog = z.infer<typeof CatalogSchema>
 export type Item = z.infer<typeof ItemSchema>
 export type Vehicle = z.infer<typeof VehicleSchema>
+export type DocumentTypeName = z.infer<typeof DocumentTypeNameSchema>
 export type DocumentType = z.infer<typeof DocumentTypeSchema>
 export type Reference = z.infer<typeof ReferenceSchema>
 export type PaymentType = z.infer<typeof PaymentTypeSchema>

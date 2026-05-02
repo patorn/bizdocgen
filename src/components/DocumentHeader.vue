@@ -30,7 +30,7 @@
 
     <div class="document-header__info">
       <h2 class="document-header__type">
-        {{ getDocumentTypeInThai(record.Record.Document_Type[0]) }}
+        {{ documentTypeLabel }}
       </h2>
       <div class="document-header__details">
         <div class="document-header__number">เลขที่: {{ record.Record.Number }}</div>
@@ -60,6 +60,10 @@ const props = defineProps<Props>()
 
 const viewModel = computed(() => {
   return getViewModel(props.record)
+})
+
+const documentTypeLabel = computed(() => {
+  return getDocumentTypeInThai(props.record.Record.Document_Type)
 })
 
 function trimAddress(address: string): string {

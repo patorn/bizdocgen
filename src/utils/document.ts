@@ -1,4 +1,22 @@
-import type { Item, DocumentType } from '../types/document-schema'
+import type { DocumentType, DocumentTypeName, Item } from '../types/document-schema'
+
+export function getDocumentTypeName(
+  type: DocumentType | DocumentTypeName | DocumentTypeName[] | null | undefined,
+): DocumentTypeName | null {
+  if (!type) {
+    return null
+  }
+
+  if (typeof type === 'string') {
+    return type
+  }
+
+  if (Array.isArray(type)) {
+    return type[0] ?? null
+  }
+
+  return type.Name
+}
 
 export function sortItems(items: Item[]): Item[] {
   return [...items].sort((a, b) => {
@@ -9,18 +27,7 @@ export function sortItems(items: Item[]): Item[] {
 }
 
 export function getDocumentTypeInThai(type: DocumentType): string {
-  switch (type) {
-    case 'Quotation':
-      return 'ใบเสนอราคา'
-    case 'Invoice':
-      return 'ใบแจ้งหนี้'
-    case 'Receipt':
-      return 'ใบเสร็จรับเงิน'
-    case 'Credit Note':
-      return 'ใบลดหนี้'
-    default:
-      return type
-  }
+  return type.Thai_Name ?? type.Name
 }
 
 export function formatDate(dateString: string): string {

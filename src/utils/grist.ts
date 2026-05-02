@@ -155,7 +155,7 @@ class MockGristAPI implements GristAPI {
         },
         Credit_Term: '30 วัน',
         Date: '2025-08-09T00:00:00.000Z',
-        Document_Type: ['Receipt'],
+        Document_Type: { Name: 'Receipt', Abbr: 'RCPT', Thai_Name: 'ใบเสร็จรับเงิน' },
         Items: [
           {
             Description: '**ไอเทมทดสอบ** - รายการสำคัญ\n- คุณภาพสูง\n- รหัสสินค้า: `TEST001`',

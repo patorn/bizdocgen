@@ -46,28 +46,28 @@ function createRecord(documentType: unknown) {
 }
 
 describe('GristRecordSchema', () => {
-  it('accepts Document_Type as a single choice and normalizes it to a one-item array', () => {
-    const parsed = GristRecordSchema.parse(createRecord('Receipt'))
+  it('parses a Document_Type reference object with Name and Abbr', () => {
+    const parsed = GristRecordSchema.parse(createRecord({ Name: 'Receipt', Abbr: 'RCPT' }))
 
-    expect(parsed.Record.Document_Type).toEqual(['Receipt'])
+    expect(parsed.Record.Document_Type).toEqual({ Name: 'Receipt', Abbr: 'RCPT' })
   })
 
-  it('accepts Document_Type as a one-item choice list', () => {
-    const parsed = GristRecordSchema.parse(createRecord(['Invoice']))
+  it('parses a Document_Type reference object without Abbr', () => {
+    const parsed = GristRecordSchema.parse(createRecord({ Name: 'Quotation' }))
 
-    expect(parsed.Record.Document_Type).toEqual(['Invoice'])
+    expect(parsed.Record.Document_Type).toEqual({ Name: 'Quotation' })
   })
 
-  it('rejects Document_Type arrays with multiple values', () => {
-    const result = GristRecordSchema.safeParse(createRecord(['Quotation', 'Invoice']))
+  it('rejects an unknown Document_Type Name', () => {
+    const result = GristRecordSchema.safeParse(createRecord({ Name: 'Purchase Order' }))
 
     expect(result.success).toBe(false)
   })
 
   it('accepts Credit Note as a valid Document_Type', () => {
-    const parsed = GristRecordSchema.parse(createRecord('Credit Note'))
+    const parsed = GristRecordSchema.parse(createRecord({ Name: 'Credit Note', Abbr: 'CN' }))
 
-    expect(parsed.Record.Document_Type).toEqual(['Credit Note'])
+    expect(parsed.Record.Document_Type).toEqual({ Name: 'Credit Note', Abbr: 'CN' })
   })
 })
 

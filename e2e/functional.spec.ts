@@ -27,7 +27,7 @@ test.describe('Grist Widget Functionality', () => {
           id: 1,
         },
         Date: '2025-08-09T00:00:00.000Z',
-        Document_Type: ['Receipt'],
+        Document_Type: { Name: 'Receipt', Abbr: 'RCPT', Thai_Name: 'ใบเสร็จรับเงิน' },
         Items: [
           {
             Description: 'Test Item',

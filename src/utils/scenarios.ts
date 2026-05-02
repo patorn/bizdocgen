@@ -19,7 +19,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Tax_ID: '9781234567890',
         },
         Date: '2025-07-21T00:00:00.000Z',
-        Document_Type: ['Receipt'],
+        Document_Type: { Name: 'Receipt', Abbr: 'RCPT', Thai_Name: 'ใบเสร็จรับเงิน' },
         Items: [
           {
             id: 301,
@@ -99,7 +99,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Tax_ID: '7772223334445',
         },
         Date: '2025-06-15T00:00:00.000Z',
-        Document_Type: ['Invoice'],
+        Document_Type: { Name: 'Invoice', Abbr: 'INV', Thai_Name: 'ใบแจ้งหนี้' },
         Items: [
           {
             id: 304,
@@ -171,7 +171,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Tax_ID: '9900112233445',
         },
         Date: '2025-05-10T00:00:00.000Z',
-        Document_Type: ['Quotation'],
+        Document_Type: { Name: 'Quotation', Abbr: 'QT', Thai_Name: 'ใบเสนอราคา' },
         Items: [
           {
             id: 306,
@@ -245,7 +245,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Tax_ID: '0000000000000',
         },
         Date: '2025-08-01T00:00:00.000Z',
-        Document_Type: ['Receipt'],
+        Document_Type: { Name: 'Receipt', Abbr: 'RCPT', Thai_Name: 'ใบเสร็จรับเงิน' },
         Items: [
           {
             id: 308,
@@ -298,7 +298,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Tax_ID: '5566778899001',
         },
         Date: '2025-03-02T00:00:00.000Z',
-        Document_Type: ['Invoice'],
+        Document_Type: { Name: 'Invoice', Abbr: 'INV', Thai_Name: 'ใบแจ้งหนี้' },
         Items: [
           {
             id: 310,
@@ -385,7 +385,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Tax_ID: '1122334455667',
         },
         Date: '2025-04-18T00:00:00.000Z',
-        Document_Type: ['Quotation'],
+        Document_Type: { Name: 'Quotation', Abbr: 'QT', Thai_Name: 'ใบเสนอราคา' },
         Items: [
           {
             id: 316,
@@ -445,7 +445,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Tax_ID: '3141592653589',
         },
         Date: '2025-07-05T00:00:00.000Z',
-        Document_Type: ['Receipt'],
+        Document_Type: { Name: 'Receipt', Abbr: 'RCPT', Thai_Name: 'ใบเสร็จรับเงิน' },
         Items: [
           {
             id: 318,
@@ -513,7 +513,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Tax_ID: '2468135791357',
         },
         Date: '2025-01-20T00:00:00.000Z',
-        Document_Type: ['Invoice'],
+        Document_Type: { Name: 'Invoice', Abbr: 'INV', Thai_Name: 'ใบแจ้งหนี้' },
         Items: [
           {
             id: 320,
@@ -574,7 +574,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Tax_ID: '1357924680135',
         },
         Date: '2025-02-14T00:00:00.000Z',
-        Document_Type: ['Receipt'],
+        Document_Type: { Name: 'Receipt', Abbr: 'RCPT', Thai_Name: 'ใบเสร็จรับเงิน' },
         Items: [
           {
             id: 323,
@@ -635,7 +635,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Tax_ID: '3216549870123',
         },
         Date: '2025-08-08T00:00:00.000Z',
-        Document_Type: ['Quotation'],
+        Document_Type: { Name: 'Quotation', Abbr: 'QT', Thai_Name: 'ใบเสนอราคา' },
         Items: [
           {
             id: 326,
@@ -696,7 +696,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Tax_ID: '1234567890000',
         },
         Date: '2025-08-09T00:00:00.000Z',
-        Document_Type: ['Receipt'],
+        Document_Type: { Name: 'Receipt', Abbr: 'RCPT', Thai_Name: 'ใบเสร็จรับเงิน' },
         Items: [
           {
             id: 328,
@@ -735,7 +735,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Tax_ID: '9781234567890',
         },
         Date: '2025-07-28T00:00:00.000Z',
-        Document_Type: ['Credit Note'],
+        Document_Type: { Name: 'Credit Note', Abbr: 'CN', Thai_Name: 'ใบลดหนี้' },
         Items: [
           {
             id: 401,

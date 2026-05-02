@@ -37,6 +37,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { GristRecord } from '../types/document-schema'
+import { getDocumentTypeName } from '../utils/document'
 import ClientInfo from './ClientInfo.vue'
 import VehicleInfo from './VehicleInfo.vue'
 import DocumentHeader from './DocumentHeader.vue'
@@ -55,7 +56,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const documentType = computed(() => {
-  return props.record?.Record.Document_Type[0] || null
+  return props.record ? getDocumentTypeName(props.record.Record.Document_Type) : null
 })
 
 const providerName = computed(() => {
