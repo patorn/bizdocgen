@@ -63,8 +63,7 @@ const isReceipt = computed(() => {
 })
 
 const displayName = computed(() => {
-  const p = props.record.Record.Provider
-  return p.Personnel_Name ?? p.Name
+  return props.record.Record.Provider.Personnel_Name
 })
 </script>
 
