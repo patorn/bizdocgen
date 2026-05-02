@@ -81,6 +81,7 @@ function trimAddress(address: string): string {
   width: 16mm;
   display: flex;
   align-items: flex-start;
+  padding: var(--spacing-sm) 0;
 }
 
 .document-header__logo {
