@@ -783,4 +783,54 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
       },
     },
   },
+  {
+    title: 'ใบเพิ่มหนี้ VAT 7% — เรียกเก็บส่วนต่างงานนอกขอบเขต',
+    slug: 'debit-note-scope-change-balance',
+    data: {
+      id: 201,
+      Record: {
+        Client: {
+          Address: '21/7 อาคารใจนิ่ง ชั้น 3 ซอยเรียบร้อย\nแขวงโกดัง เขตใจเย็น กรุงเทพฯ 10500',
+          Name: 'บริษัท สายไฟสงบ จำกัด',
+          Tax_ID: '5566778899001',
+        },
+        Date: '2025-03-10T00:00:00.000Z',
+        Document_Type: { Name: 'Debit Note', Abbr: 'DN', Thai_Name: 'ใบเพิ่มหนี้' },
+        Items: [
+          {
+            id: 403,
+            Description:
+              'ค่าแรงเพิ่มเติมจากงานนอกขอบเขต (Scope Change)\n- เพิ่มจุดติดตั้ง UPS อีก 2 จุด\n- งานนอกเวลาทำการเพื่อไม่รบกวนการใช้งาน',
+            Manual_Sort: 1,
+            Quantity: 1,
+            Unit_Price: 12000,
+            Total: 12000,
+          },
+          {
+            id: 404,
+            Description: 'ค่าวัสดุสายไฟและอุปกรณ์รัดสายเพิ่มเติม',
+            Manual_Sort: 2,
+            Quantity: 1,
+            Unit_Price: 360,
+            Total: 360,
+          },
+        ],
+        Number: 'DN-2025-0001',
+        Payment_Method: null,
+        Provider: {
+          Address: '123 ถนนแก้ปัญหา แขวงช่างกล เขตทุกจังหวัด\nราชอาณาจักรไทย 10000',
+          Email: 'hero@fixall.th',
+          Name: 'ฟรีแลนซ์แก้ปัญหาทั่วราชอาณาจักร',
+          Personnel_Name: 'นาย โปร แก้ได้หมด',
+          Tax_ID: '1234567890123',
+        },
+        Reference: {
+          Number: 'RCPT-2025-0001',
+        },
+        Remarks:
+          '### หมายเหตุ\nใบเพิ่มหนี้นี้ออกเพื่อเรียกเก็บส่วนต่างจากงานนอกขอบเขตตามที่ตกลงเพิ่มเติม\n\n> กรุณาชำระยอดเพิ่มภายใน 7 วันทำการ',
+        Tax: 0.07,
+      },
+    },
+  },
 ]

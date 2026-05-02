@@ -57,7 +57,13 @@ export const VehicleSchema = z.object({
   Sales_Order_Number: z.string().nullish(),
 })
 
-export const DocumentTypeNameSchema = z.enum(['Quotation', 'Invoice', 'Receipt', 'Credit Note'])
+export const DocumentTypeNameSchema = z.enum([
+  'Quotation',
+  'Invoice',
+  'Receipt',
+  'Credit Note',
+  'Debit Note',
+])
 
 export const DocumentTypeSchema = z.object({
   Name: DocumentTypeNameSchema,

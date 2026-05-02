@@ -69,6 +69,18 @@ describe('GristRecordSchema', () => {
 
     expect(parsed.Record.Document_Type).toEqual({ Name: 'Credit Note', Abbr: 'CN' })
   })
+
+  it('accepts Debit Note as a valid Document_Type', () => {
+    const parsed = GristRecordSchema.parse(
+      createRecord({ Name: 'Debit Note', Abbr: 'DN', Thai_Name: 'ใบเพิ่มหนี้' }),
+    )
+
+    expect(parsed.Record.Document_Type).toEqual({
+      Name: 'Debit Note',
+      Abbr: 'DN',
+      Thai_Name: 'ใบเพิ่มหนี้',
+    })
+  })
 })
 
 describe('PaymentRecordSchema', () => {
