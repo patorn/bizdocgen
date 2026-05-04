@@ -139,9 +139,14 @@ describe('PaymentRecordSchema', () => {
       Type: 'Bank Transfer',
       Amount: 20000,
       Datetime: '2025-07-22T08:00:00.000Z',
-      Bank: 'ธนาคารไทยพาณิชย์',
-      Branch: 'เซ็นทรัลเวิลด์',
-      Account_Number: '111-1-11111-1',
+      Payment_Method: {
+        Account_Holder: 'นาย โปร แก้ได้หมด',
+        Account_Number: '111-1-11111-1',
+        Bank: 'ธนาคารไทยพาณิชย์',
+        Branch: 'เซ็นทรัลเวิลด์',
+        Name: 'บัญชีหลัก',
+        PromptPay: '0891234567',
+      },
     })
 
     expect(result.success).toBe(true)
@@ -149,7 +154,7 @@ describe('PaymentRecordSchema', () => {
       throw new Error('Expected Bank Transfer payment record to parse successfully')
     }
 
-    expect(result.data.Account_Number).toBe('111-1-11111-1')
+    expect(result.data.Payment_Method?.Account_Number).toBe('111-1-11111-1')
   })
 
   it('rejects an unknown payment type', () => {

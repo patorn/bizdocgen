@@ -13,13 +13,15 @@
         <span class="payment-records__row-type">{{ getPaymentTypeLabel(payment.Type) }}</span>
         <span class="payment-records__row-details">
           <template v-if="payment.Type === 'Cheque'">
-            ธนาคาร {{ payment.Bank }} สาขา {{ payment.Branch }} เลขที่เช็ค {{ payment.Transaction_Number }}
+            ธนาคาร {{ getPaymentMethod(payment)?.Bank }} สาขา {{ getPaymentMethod(payment)?.Branch }} เลขที่เช็ค
+            {{ payment.Transaction_Number }}
           </template>
           <template v-else-if="payment.Type === 'Credit Card'">
             {{ payment.Card_Type }}
           </template>
           <template v-else-if="payment.Type === 'Bank Transfer'">
-            ธนาคาร {{ payment.Bank }} สาขา {{ payment.Branch }} บัญชี {{ payment.Account_Number }}
+            ธนาคาร {{ getPaymentMethod(payment)?.Bank }} สาขา {{ getPaymentMethod(payment)?.Branch }} บัญชี
+            {{ getPaymentMethod(payment)?.Account_Number }}
           </template>
         </span>
         <span class="payment-records__row-datetime">{{ formatDatetime(payment.Datetime) }}</span>
@@ -48,7 +50,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { GristRecord } from '../types/document-schema'
+import type { GristRecord, PaymentMethod, PaymentRecord } from '../types/document-schema'
 import { formatCurrency } from '../utils/currency'
 import { getViewModel } from '../utils/view-model'
 
@@ -75,6 +77,11 @@ const balance = computed(() => documentTotal.value - totalPaid.value)
 
 function getPaymentTypeLabel(type: string): string {
   return paymentTypeLabels[type] ?? type
+}
+
+function getPaymentMethod(payment: PaymentRecord): PaymentMethod | null | undefined {
+  // Fallback to document-level method for older records without per-payment link.
+  return payment.Payment_Method ?? props.record.Record.Payment_Method
 }
 
 function formatDatetime(datetime: string): string {

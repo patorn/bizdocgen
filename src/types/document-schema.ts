@@ -83,15 +83,12 @@ export const PaymentRecordSchema = z.object({
   Type: PaymentTypeSchema,
   Amount: z.number(),
   Datetime: z.string(),
-  // Cheque + Bank Transfer
-  Bank: z.string().nullish(),
-  Branch: z.string().nullish(),
+  // Link to payment method row/details
+  Payment_Method: PaymentMethodSchema.nullish(),
   // Cheque only
   Transaction_Number: z.string().nullish(),
   // Credit Card only
   Card_Type: z.string().nullish(),
-  // Bank Transfer only
-  Account_Number: z.string().nullish(),
 })
 
 export const RecordDataSchema = z.object({

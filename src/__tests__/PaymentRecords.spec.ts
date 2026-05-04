@@ -45,6 +45,15 @@ function createRecord(payments: GristRecord['Record']['Payments']): GristRecord 
 }
 
 describe('PaymentRecords', () => {
+  const linkedPaymentMethod = {
+    Account_Holder: 'นาย ทด สอบ',
+    Account_Number: '111-1-11111-1',
+    Bank: 'ธนาคารไทยพาณิชย์',
+    Branch: 'เซ็นทรัลเวิลด์',
+    Name: 'บัญชีหลัก',
+    PromptPay: '0891234567',
+  }
+
   it('renders nothing when there are no payment records', () => {
     const wrapper = mount(PaymentRecords, {
       props: { record: createRecord(null) },
@@ -60,17 +69,18 @@ describe('PaymentRecords', () => {
         Type: 'Cheque',
         Amount: 300,
         Datetime: '2025-08-09T11:00:00.000Z',
-        Bank: 'ธนาคารกรุงเทพ',
-        Branch: 'สีลม',
+        Payment_Method: {
+          ...linkedPaymentMethod,
+          Bank: 'ธนาคารกรุงเทพ',
+          Branch: 'สีลม',
+        },
         Transaction_Number: 'CHQ-9999',
       },
       {
         Type: 'Bank Transfer',
         Amount: 200,
         Datetime: '2025-08-09T12:00:00.000Z',
-        Bank: 'ธนาคารไทยพาณิชย์',
-        Branch: 'เซ็นทรัลเวิลด์',
-        Account_Number: '111-1-11111-1',
+        Payment_Method: linkedPaymentMethod,
       },
     ])
 
@@ -86,8 +96,11 @@ describe('PaymentRecords', () => {
         Type: 'Cheque',
         Amount: 5000,
         Datetime: '2025-08-09T10:00:00.000Z',
-        Bank: 'ธนาคารกรุงเทพ',
-        Branch: 'สีลม',
+        Payment_Method: {
+          ...linkedPaymentMethod,
+          Bank: 'ธนาคารกรุงเทพ',
+          Branch: 'สีลม',
+        },
         Transaction_Number: 'CHQ-1234',
       },
     ])
@@ -119,9 +132,10 @@ describe('PaymentRecords', () => {
         Type: 'Bank Transfer',
         Amount: 4000,
         Datetime: '2025-08-09T10:00:00.000Z',
-        Bank: 'ธนาคารไทยพาณิชย์',
-        Branch: 'เซ็นทรัลเวิลด์',
-        Account_Number: '222-2-22222-2',
+        Payment_Method: {
+          ...linkedPaymentMethod,
+          Account_Number: '222-2-22222-2',
+        },
       },
     ])
 
@@ -139,9 +153,7 @@ describe('PaymentRecords', () => {
         Type: 'Bank Transfer',
         Amount: 300,
         Datetime: '2025-08-09T11:00:00.000Z',
-        Bank: 'ธนาคารไทยพาณิชย์',
-        Branch: 'เซ็นทรัลเวิลด์',
-        Account_Number: '111-1-11111-1',
+        Payment_Method: linkedPaymentMethod,
       },
     ])
 

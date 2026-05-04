@@ -54,11 +54,9 @@ def serialize_payment(payment):
         "Type": payment.Type,
         "Amount": payment.Amount,
         "Datetime": str(payment.Datetime) if payment.Datetime else "",
-        "Bank": payment.Bank or None,
-        "Branch": payment.Branch or None,
+        "Payment_Method": serialize_payment_method(payment.Payment_Method),
         "Transaction_Number": payment.Transaction_Number or None,
         "Card_Type": payment.Card_Type or None,
-        "Account_Number": payment.Account_Number or None,
     }
 
 def serialize_vehicle(vehicle):
