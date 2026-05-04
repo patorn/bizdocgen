@@ -166,7 +166,6 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           {
             Amount: 14100,
             Datetime: '2025-06-15T11:30:00.000Z',
-            Card_Type: 'Visa',
             Payment_Method: {
               Type: { Name: 'Credit Card', Thai_Name: 'บัตรเครดิต' },
               Name: 'Visa',

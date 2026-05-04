@@ -116,7 +116,6 @@ describe('PaymentRecords', () => {
       {
         Amount: 3000,
         Datetime: '2025-08-09T10:00:00.000Z',
-        Card_Type: 'Visa',
         Payment_Method: { Type: { Name: 'Credit Card', Thai_Name: 'บัตรเครดิต' }, Name: 'Visa' },
       },
     ])
@@ -178,7 +177,6 @@ describe('PaymentRecords', () => {
       {
         Amount: 300,
         Datetime: '2025-08-09T11:00:00.000Z',
-        Card_Type: 'Mastercard',
         Payment_Method: { Type: { Name: 'Credit Card', Thai_Name: 'บัตรเครดิต' }, Name: 'Mastercard' },
       },
     ])

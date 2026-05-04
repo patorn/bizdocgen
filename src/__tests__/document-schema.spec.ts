@@ -125,7 +125,6 @@ describe('PaymentRecordSchema', () => {
     const result = PaymentRecordSchema.safeParse({
       Amount: 8500,
       Datetime: '2025-07-21T10:00:00.000Z',
-      Card_Type: 'Mastercard',
       Payment_Method: { Type: { Name: 'Credit Card', Thai_Name: 'บัตรเครดิต' }, Name: 'Mastercard' },
     })
 
@@ -134,7 +133,7 @@ describe('PaymentRecordSchema', () => {
       throw new Error('Expected Credit Card payment record to parse successfully')
     }
 
-    expect(result.data.Card_Type).toBe('Mastercard')
+    expect(result.data.Payment_Method?.Name).toBe('Mastercard')
   })
 
   it('parses a Bank Transfer payment record', () => {

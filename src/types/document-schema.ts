@@ -92,8 +92,6 @@ export const PaymentRecordSchema = z.object({
   Payment_Method: PaymentMethodSchema.nullish(),
   // Cheque only
   Transaction_Number: z.string().nullish(),
-  // Credit Card only
-  Card_Type: z.string().nullish(),
 })
 
 export const RecordDataSchema = z.object({

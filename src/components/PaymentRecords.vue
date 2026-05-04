@@ -17,7 +17,7 @@
             {{ payment.Transaction_Number }}
           </template>
           <template v-else-if="getPaymentMethod(payment)?.Type?.Name === 'Credit Card'">
-            {{ payment.Card_Type }}
+            {{ getPaymentMethod(payment)?.Name }}
           </template>
           <template v-else-if="getPaymentMethod(payment)?.Type?.Name === 'Bank Transfer'">
             ธนาคาร {{ getPaymentMethod(payment)?.Bank }} สาขา {{ getPaymentMethod(payment)?.Branch }} บัญชี
