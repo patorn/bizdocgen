@@ -1,6 +1,14 @@
 import { z } from 'zod'
 
+export const PaymentTypeNameSchema = z.enum(['Cash', 'Cheque', 'Credit Card', 'Bank Transfer'])
+
+export const PaymentTypeSchema = z.object({
+  Name: PaymentTypeNameSchema,
+  Thai_Name: z.string().nullish(),
+})
+
 export const PaymentMethodSchema = z.object({
+  Type: PaymentTypeSchema.nullish(),
   Account_Holder: z.string().nullish(),
   Account_Number: z.string().nullish(),
   Bank: z.string().nullish(),
@@ -77,13 +85,10 @@ export const ReferenceSchema = z
   })
   .nullish()
 
-export const PaymentTypeSchema = z.enum(['Cash', 'Cheque', 'Credit Card', 'Bank Transfer'])
-
 export const PaymentRecordSchema = z.object({
-  Type: PaymentTypeSchema,
   Amount: z.number(),
   Datetime: z.string(),
-  // Link to payment method row/details
+  // Link to payment method row/details (carries Type, bank details, etc.)
   Payment_Method: PaymentMethodSchema.nullish(),
   // Cheque only
   Transaction_Number: z.string().nullish(),
@@ -124,6 +129,7 @@ export type Vehicle = z.infer<typeof VehicleSchema>
 export type DocumentTypeName = z.infer<typeof DocumentTypeNameSchema>
 export type DocumentType = z.infer<typeof DocumentTypeSchema>
 export type Reference = z.infer<typeof ReferenceSchema>
+export type PaymentTypeName = z.infer<typeof PaymentTypeNameSchema>
 export type PaymentType = z.infer<typeof PaymentTypeSchema>
 export type PaymentRecord = z.infer<typeof PaymentRecordSchema>
 export type RecordData = z.infer<typeof RecordDataSchema>

@@ -10,16 +10,16 @@
         data-testid="payment-record-row"
       >
         <span class="payment-records__row-number">{{ index + 1 }}.</span>
-        <span class="payment-records__row-type">{{ getPaymentTypeLabel(payment.Type) }}</span>
+        <span class="payment-records__row-type">{{ getPaymentMethod(payment)?.Type?.Thai_Name ?? getPaymentMethod(payment)?.Type?.Name ?? '' }}</span>
         <span class="payment-records__row-details">
-          <template v-if="payment.Type === 'Cheque'">
+          <template v-if="getPaymentMethod(payment)?.Type?.Name === 'Cheque'">
             ธนาคาร {{ getPaymentMethod(payment)?.Bank }} สาขา {{ getPaymentMethod(payment)?.Branch }} เลขที่เช็ค
             {{ payment.Transaction_Number }}
           </template>
-          <template v-else-if="payment.Type === 'Credit Card'">
+          <template v-else-if="getPaymentMethod(payment)?.Type?.Name === 'Credit Card'">
             {{ payment.Card_Type }}
           </template>
-          <template v-else-if="payment.Type === 'Bank Transfer'">
+          <template v-else-if="getPaymentMethod(payment)?.Type?.Name === 'Bank Transfer'">
             ธนาคาร {{ getPaymentMethod(payment)?.Bank }} สาขา {{ getPaymentMethod(payment)?.Branch }} บัญชี
             {{ getPaymentMethod(payment)?.Account_Number }}
           </template>
@@ -54,13 +54,6 @@ import type { GristRecord, PaymentMethod, PaymentRecord } from '../types/documen
 import { formatCurrency } from '../utils/currency'
 import { getViewModel } from '../utils/view-model'
 
-const paymentTypeLabels: Record<string, string> = {
-  Cash: 'เงินสด',
-  Cheque: 'เช็ค',
-  'Credit Card': 'บัตรเครดิต',
-  'Bank Transfer': 'โอนเงิน',
-}
-
 interface Props {
   record: GristRecord
 }
@@ -74,10 +67,6 @@ const totalPaid = computed(() => payments.value.reduce((sum, p) => sum + p.Amoun
 const documentTotal = computed(() => getViewModel(props.record).total)
 
 const balance = computed(() => documentTotal.value - totalPaid.value)
-
-function getPaymentTypeLabel(type: string): string {
-  return paymentTypeLabels[type] ?? type
-}
 
 function getPaymentMethod(payment: PaymentRecord): PaymentMethod | null | undefined {
   // Fallback to document-level method for older records without per-payment link.

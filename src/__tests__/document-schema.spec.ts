@@ -86,9 +86,9 @@ describe('GristRecordSchema', () => {
 describe('PaymentRecordSchema', () => {
   it('parses a Cash payment record with only required fields', () => {
     const result = PaymentRecordSchema.safeParse({
-      Type: 'Cash',
       Amount: 5000,
       Datetime: '2025-07-21T09:00:00.000Z',
+      Payment_Method: { Type: { Name: 'Cash', Thai_Name: 'เงินสด' }, Name: 'เงินสด' },
     })
 
     expect(result.success).toBe(true)
@@ -96,17 +96,20 @@ describe('PaymentRecordSchema', () => {
       throw new Error('Expected Cash payment record to parse successfully')
     }
 
-    expect(result.data.Type).toBe('Cash')
+    expect(result.data.Payment_Method?.Type?.Name).toBe('Cash')
     expect(result.data.Amount).toBe(5000)
   })
 
   it('parses a Cheque payment record with all fields', () => {
     const result = PaymentRecordSchema.safeParse({
-      Type: 'Cheque',
       Amount: 10000,
       Datetime: '2025-07-21T09:00:00.000Z',
-      Bank: 'ธนาคารกรุงเทพ',
-      Branch: 'สีลม',
+      Payment_Method: {
+        Type: { Name: 'Cheque', Thai_Name: 'เช็ค' },
+        Bank: 'ธนาคารกรุงเทพ',
+        Branch: 'สีลม',
+        Name: 'ธนาคารกรุงเทพ',
+      },
       Transaction_Number: 'CHQ-001',
     })
 
@@ -120,10 +123,10 @@ describe('PaymentRecordSchema', () => {
 
   it('parses a Credit Card payment record', () => {
     const result = PaymentRecordSchema.safeParse({
-      Type: 'Credit Card',
       Amount: 8500,
       Datetime: '2025-07-21T10:00:00.000Z',
       Card_Type: 'Mastercard',
+      Payment_Method: { Type: { Name: 'Credit Card', Thai_Name: 'บัตรเครดิต' }, Name: 'Mastercard' },
     })
 
     expect(result.success).toBe(true)
@@ -136,10 +139,10 @@ describe('PaymentRecordSchema', () => {
 
   it('parses a Bank Transfer payment record', () => {
     const result = PaymentRecordSchema.safeParse({
-      Type: 'Bank Transfer',
       Amount: 20000,
       Datetime: '2025-07-22T08:00:00.000Z',
       Payment_Method: {
+        Type: { Name: 'Bank Transfer', Thai_Name: 'โอนเงิน' },
         Account_Holder: 'นาย โปร แก้ได้หมด',
         Account_Number: '111-1-11111-1',
         Bank: 'ธนาคารไทยพาณิชย์',
@@ -159,9 +162,9 @@ describe('PaymentRecordSchema', () => {
 
   it('rejects an unknown payment type', () => {
     const result = PaymentRecordSchema.safeParse({
-      Type: 'Crypto',
       Amount: 500,
       Datetime: '2025-07-22T08:00:00.000Z',
+      Payment_Method: { Type: { Name: 'Crypto' as never, Thai_Name: null }, Name: 'Crypto' },
     })
 
     expect(result.success).toBe(false)
@@ -169,8 +172,8 @@ describe('PaymentRecordSchema', () => {
 
   it('rejects a record missing Amount', () => {
     const result = PaymentRecordSchema.safeParse({
-      Type: 'Cash',
       Datetime: '2025-07-22T08:00:00.000Z',
+      Payment_Method: { Type: { Name: 'Cash', Thai_Name: 'เงินสด' }, Name: 'เงินสด' },
     })
 
     expect(result.success).toBe(false)

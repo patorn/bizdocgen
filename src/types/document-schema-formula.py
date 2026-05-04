@@ -47,11 +47,11 @@ def serialize_payment_method(pm):
         "Branch": pm.Branch or None,
         "Name": pm.Name,
         "PromptPay": pm.PromptPay or None,
+        "Type": {"Name": pm.Type.Name, "Thai_Name": pm.Type.Thai_Name or None} if pm.Type else None,
     }
 
 def serialize_payment(payment):
     return {
-        "Type": payment.Type,
         "Amount": payment.Amount,
         "Datetime": str(payment.Datetime) if payment.Datetime else "",
         "Payment_Method": serialize_payment_method(payment.Payment_Method),

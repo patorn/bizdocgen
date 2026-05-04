@@ -71,10 +71,10 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
         Tax: 0.07,
         Payments: [
           {
-            Type: 'Bank Transfer',
             Amount: 20000,
             Datetime: '2025-07-21T09:30:00.000Z',
             Payment_Method: {
+              Type: { Name: 'Bank Transfer', Thai_Name: 'โอนเงิน' },
               Account_Holder: 'นาย โปร แก้ได้หมด',
               Account_Number: '111-1-11111-1',
               Bank: 'ธนาคารไทยพาณิชย์',
@@ -84,9 +84,12 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
             },
           },
           {
-            Type: 'Cash',
             Amount: 17185.2,
             Datetime: '2025-07-21T14:00:00.000Z',
+            Payment_Method: {
+              Type: { Name: 'Cash', Thai_Name: 'เงินสด' },
+              Name: 'เงินสด',
+            },
           },
         ],
       },
@@ -147,10 +150,10 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
         Tax: -0.03,
         Payments: [
           {
-            Type: 'Cheque',
             Amount: 15000,
             Datetime: '2025-06-15T10:00:00.000Z',
             Payment_Method: {
+              Type: { Name: 'Cheque', Thai_Name: 'เช็ค' },
               Account_Holder: 'นาย โปร แก้ได้หมด',
               Account_Number: '111-1-11111-1',
               Bank: 'ธนาคารกรุงเทพ',
@@ -161,10 +164,13 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
             Transaction_Number: 'CHQ-0034521',
           },
           {
-            Type: 'Credit Card',
             Amount: 14100,
             Datetime: '2025-06-15T11:30:00.000Z',
             Card_Type: 'Visa',
+            Payment_Method: {
+              Type: { Name: 'Credit Card', Thai_Name: 'บัตรเครดิต' },
+              Name: 'Visa',
+            },
           },
         ],
       },

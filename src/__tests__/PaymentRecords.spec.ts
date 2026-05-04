@@ -46,6 +46,7 @@ function createRecord(payments: GristRecord['Record']['Payments']): GristRecord 
 
 describe('PaymentRecords', () => {
   const linkedPaymentMethod = {
+    Type: { Name: 'Bank Transfer' as const, Thai_Name: 'โอนเงิน' },
     Account_Holder: 'นาย ทด สอบ',
     Account_Number: '111-1-11111-1',
     Bank: 'ธนาคารไทยพาณิชย์',
@@ -64,20 +65,19 @@ describe('PaymentRecords', () => {
 
   it('renders all payment rows', () => {
     const record = createRecord([
-      { Type: 'Cash', Amount: 500, Datetime: '2025-08-09T10:00:00.000Z' },
+      { Amount: 500, Datetime: '2025-08-09T10:00:00.000Z', Payment_Method: { Type: { Name: 'Cash', Thai_Name: 'เงินสด' }, Name: 'เงินสด' } },
       {
-        Type: 'Cheque',
         Amount: 300,
         Datetime: '2025-08-09T11:00:00.000Z',
         Payment_Method: {
           ...linkedPaymentMethod,
+          Type: { Name: 'Cheque', Thai_Name: 'เช็ค' },
           Bank: 'ธนาคารกรุงเทพ',
           Branch: 'สีลม',
         },
         Transaction_Number: 'CHQ-9999',
       },
       {
-        Type: 'Bank Transfer',
         Amount: 200,
         Datetime: '2025-08-09T12:00:00.000Z',
         Payment_Method: linkedPaymentMethod,
@@ -93,11 +93,11 @@ describe('PaymentRecords', () => {
   it('shows type-specific details for Cheque', () => {
     const record = createRecord([
       {
-        Type: 'Cheque',
         Amount: 5000,
         Datetime: '2025-08-09T10:00:00.000Z',
         Payment_Method: {
           ...linkedPaymentMethod,
+          Type: { Name: 'Cheque', Thai_Name: 'เช็ค' },
           Bank: 'ธนาคารกรุงเทพ',
           Branch: 'สีลม',
         },
@@ -114,10 +114,10 @@ describe('PaymentRecords', () => {
   it('shows type-specific details for Credit Card', () => {
     const record = createRecord([
       {
-        Type: 'Credit Card',
         Amount: 3000,
         Datetime: '2025-08-09T10:00:00.000Z',
         Card_Type: 'Visa',
+        Payment_Method: { Type: { Name: 'Credit Card', Thai_Name: 'บัตรเครดิต' }, Name: 'Visa' },
       },
     ])
 
@@ -129,7 +129,6 @@ describe('PaymentRecords', () => {
   it('shows type-specific details for Bank Transfer', () => {
     const record = createRecord([
       {
-        Type: 'Bank Transfer',
         Amount: 4000,
         Datetime: '2025-08-09T10:00:00.000Z',
         Payment_Method: {
@@ -148,9 +147,8 @@ describe('PaymentRecords', () => {
   it('calculates totalPaid and balance correctly', async () => {
     // Tax=0 so document total = item total = 1000
     const record = createRecord([
-      { Type: 'Cash', Amount: 400, Datetime: '2025-08-09T10:00:00.000Z' },
+      { Amount: 400, Datetime: '2025-08-09T10:00:00.000Z', Payment_Method: { Type: { Name: 'Cash', Thai_Name: 'เงินสด' }, Name: 'เงินสด' } },
       {
-        Type: 'Bank Transfer',
         Amount: 300,
         Datetime: '2025-08-09T11:00:00.000Z',
         Payment_Method: linkedPaymentMethod,
@@ -173,15 +171,15 @@ describe('PaymentRecords', () => {
 
   it('updates when record prop changes', async () => {
     const firstRecord = createRecord([
-      { Type: 'Cash', Amount: 200, Datetime: '2025-08-09T10:00:00.000Z' },
+      { Amount: 200, Datetime: '2025-08-09T10:00:00.000Z', Payment_Method: { Type: { Name: 'Cash', Thai_Name: 'เงินสด' }, Name: 'เงินสด' } },
     ])
     const secondRecord = createRecord([
-      { Type: 'Cash', Amount: 500, Datetime: '2025-08-09T10:00:00.000Z' },
+      { Amount: 500, Datetime: '2025-08-09T10:00:00.000Z', Payment_Method: { Type: { Name: 'Cash', Thai_Name: 'เงินสด' }, Name: 'เงินสด' } },
       {
-        Type: 'Credit Card',
         Amount: 300,
         Datetime: '2025-08-09T11:00:00.000Z',
         Card_Type: 'Mastercard',
+        Payment_Method: { Type: { Name: 'Credit Card', Thai_Name: 'บัตรเครดิต' }, Name: 'Mastercard' },
       },
     ])
 
