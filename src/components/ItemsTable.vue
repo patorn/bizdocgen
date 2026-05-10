@@ -6,6 +6,7 @@
         <tr class="items-table__row">
           <th v-if="!props.compact" class="items-table__header items-table__header--number">ลำดับ</th>
           <th class="items-table__header items-table__header--description">รายการ</th>
+          <th v-if="hasDocumentCode" class="items-table__header items-table__header--document-code">เลขที่เอกสาร</th>
           <th v-if="!props.compact" class="items-table__header items-table__header--quantity">จำนวน</th>
           <th v-if="!props.compact" class="items-table__header items-table__header--unit-price">ราคาต่อหน่วย</th>
           <th class="items-table__header items-table__header--total">จำนวนเงิน</th>
@@ -23,14 +24,14 @@
             <template v-else>
               <span class="items-table__description">{{ item.description }}</span>
             </template>
-            <template v-if="item.catalogCode || item.documentCode">
+            <template v-if="item.catalogCode">
               <span v-if="item.catalogCode" class="items-table__tag items-table__tag--catalog">
                 รหัสสินค้า: {{ item.catalogCode }}
               </span>
-              <span v-if="item.documentCode" class="items-table__tag items-table__tag--document">
-                เลขที่เอกสาร: {{ item.documentCode }}
-              </span>
             </template>
+          </td>
+          <td v-if="hasDocumentCode" class="items-table__cell items-table__cell--document-code">
+            {{ item.documentCode || '-' }}
           </td>
           <td v-if="!props.compact" class="items-table__cell items-table__cell--quantity">{{ item.quantity }}</td>
           <td v-if="!props.compact" class="items-table__cell items-table__cell--unit-price">
@@ -61,6 +62,10 @@ const props = defineProps<Props>()
 
 const viewModel = computed(() => {
   return getViewModel(props.record)
+})
+
+const hasDocumentCode = computed(() => {
+  return viewModel.value.items.some((item) => Boolean(item.documentCode))
 })
 </script>
 
@@ -108,6 +113,12 @@ const viewModel = computed(() => {
 .items-table__header--description,
 .items-table__cell--description {
   width: auto;
+}
+
+.items-table__header--document-code,
+.items-table__cell--document-code {
+  width: 2.5cm;
+  text-align: left;
 }
 
 .items-table__header--quantity,
@@ -170,11 +181,6 @@ const viewModel = computed(() => {
 }
 
 .items-table__tag--catalog {
-  background-color: var(--bg-gray-50);
-  color: var(--text-secondary);
-}
-
-.items-table__tag--document {
   background-color: var(--bg-gray-50);
   color: var(--text-secondary);
 }

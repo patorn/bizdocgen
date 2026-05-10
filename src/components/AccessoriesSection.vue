@@ -24,7 +24,7 @@
           <span class="accessories-section__description">{{ accessory.Description }}</span>
           <template v-if="accessory.Catalog?.Code">
             <span v-if="accessory.Catalog?.Code" class="accessories-section__tag">
-              รหัสสินค้า: {{ accessory.Catalog.Code }}
+              ({{ accessory.Catalog.Code }})
             </span>
           </template>
         </li>
@@ -98,6 +98,7 @@ const accessoryColumns = computed(() => {
 .accessories-section__item {
   margin-bottom: var(--spacing-xs);
   line-height: var(--line-height-base);
+  font-size: var(--font-size-base);
 }
 
 .accessories-section__description {
@@ -107,6 +108,5 @@ const accessoryColumns = computed(() => {
 .accessories-section__tag {
   margin-left: 4px;
   color: var(--text-secondary);
-  font-size: var(--font-size-sm);
 }
 </style>

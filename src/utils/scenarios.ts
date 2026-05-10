@@ -731,6 +731,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           {
             id: 330,
             Description: 'เงินดาวน์',
+            Document_Code: '2025-0002',
             Manual_Sort: 1,
             Quantity: 1,
             Unit_Price: 130800,
