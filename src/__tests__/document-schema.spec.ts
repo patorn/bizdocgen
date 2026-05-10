@@ -81,6 +81,93 @@ describe('GristRecordSchema', () => {
       Thai_Name: 'ใบเพิ่มหนี้',
     })
   })
+
+  it('accepts Car Sale Agreement as a valid Document_Type', () => {
+    const parsed = GristRecordSchema.parse(
+      createRecord({
+        Name: 'Car Sale Agreement',
+        Abbr: 'CSA',
+        Thai_Name: 'สัญญาซื้อขายรถยนต์',
+      }),
+    )
+
+    expect(parsed.Record.Document_Type).toEqual({
+      Name: 'Car Sale Agreement',
+      Abbr: 'CSA',
+      Thai_Name: 'สัญญาซื้อขายรถยนต์',
+    })
+  })
+
+  it('parses car sale agreement financing with accessory objects', () => {
+    const parsed = GristRecordSchema.parse({
+      ...createRecord({ Name: 'Car Sale Agreement' }),
+      Record: {
+        ...createRecord({ Name: 'Car Sale Agreement' }).Record,
+        Financing: {
+          Net_Selling_Price: 654000,
+          Down_Payment_Percentage: 20,
+          Down_Payment_Amount: 130800,
+          Hire_Purchase_Amount: 523200,
+          Installment_Plan_Term_Months: 60,
+          Installment_Plan_Interest_Rate: 3.69,
+          Installment_Plan_Monthly_Payment: 9892,
+          Insurance_Company: 'วิริยะประกันภัย',
+          Insurance_Sum_Assured: 530000,
+          Insurance_Premium: 0,
+          Accessories: [
+            {
+              Catalog: { Type: 'Product', Code: 'ACC-001', Name: 'ฟิล์ม Lamina' },
+              Document_Code: 'DOC-001',
+              Description: 'ฟิล์ม Lamina',
+              Manual_Sort: 2,
+              id: 101,
+            },
+            {
+              Catalog: null,
+              Document_Code: null,
+              Description: 'กรอบป้ายทะเบียน',
+              Manual_Sort: 3,
+              id: 102,
+            },
+          ],
+        },
+      },
+    })
+
+    expect(parsed.Record.Financing?.Accessories).toHaveLength(2)
+    expect(parsed.Record.Financing?.Accessories?.[0]?.Catalog?.Code).toBe('ACC-001')
+  })
+
+  it('rejects accessory object without Description', () => {
+    const result = GristRecordSchema.safeParse({
+      ...createRecord({ Name: 'Quotation' }),
+      Record: {
+        ...createRecord({ Name: 'Quotation' }).Record,
+        Financing: {
+          Net_Selling_Price: 654000,
+          Down_Payment_Percentage: 20,
+          Down_Payment_Amount: 130800,
+          Hire_Purchase_Amount: 523200,
+          Installment_Plan_Term_Months: 60,
+          Installment_Plan_Interest_Rate: 3.69,
+          Installment_Plan_Monthly_Payment: 9892,
+          Insurance_Company: null,
+          Insurance_Sum_Assured: null,
+          Insurance_Premium: null,
+          Accessories: [
+            {
+              Catalog: null,
+              Document_Code: null,
+              Manual_Sort: 1,
+              id: 777,
+            },
+          ],
+        },
+      },
+    })
+
+    expect(result.success).toBe(false)
+  })
 })
 
 describe('PaymentRecordSchema', () => {

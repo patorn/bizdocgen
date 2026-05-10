@@ -52,6 +52,14 @@ export const ItemSchema = z.object({
   id: z.number(),
 })
 
+export const AccessorySchema = z.object({
+  Catalog: CatalogSchema.nullish(),
+  Document_Code: z.string().nullish(),
+  Description: z.string(),
+  Manual_Sort: z.number().nullish(),
+  id: z.number(),
+})
+
 export const VehicleSchema = z.object({
   Make: z.string(),
   Model: z.string(),
@@ -67,6 +75,7 @@ export const VehicleSchema = z.object({
 
 export const DocumentTypeNameSchema = z.enum([
   'Quotation',
+  'Car Sale Agreement',
   'Invoice',
   'Receipt',
   'Credit Note',
@@ -94,6 +103,20 @@ export const PaymentRecordSchema = z.object({
   Transaction_Number: z.string().nullish(),
 })
 
+export const FinancingSchema = z.object({
+  Net_Selling_Price: z.number().nullish(),
+  Down_Payment_Percentage: z.number().nullish(),
+  Down_Payment_Amount: z.number().nullish(),
+  Hire_Purchase_Amount: z.number().nullish(),
+  Installment_Plan_Term_Months: z.number(),
+  Installment_Plan_Interest_Rate: z.number(),
+  Installment_Plan_Monthly_Payment: z.number(),
+  Insurance_Company: z.string().nullish(),
+  Insurance_Sum_Assured: z.number().nullish(),
+  Insurance_Premium: z.number().nullish(),
+  Accessories: z.array(AccessorySchema).nullish(),
+})
+
 export const RecordDataSchema = z.object({
   Client: ClientSchema,
   Credit_Term: z.string().nullish(),
@@ -109,6 +132,7 @@ export const RecordDataSchema = z.object({
   Tax: z.number(),
   Signed_Document_URL: z.union([z.url(), z.literal('')]).nullish(),
   Vehicle: VehicleSchema.nullish(),
+  Financing: FinancingSchema.nullish(),
 })
 
 export const GristRecordSchema = z.object({
@@ -123,6 +147,7 @@ export type Provider = z.infer<typeof ProviderSchema> // includes Personnel_Name
 export type CatalogType = z.infer<typeof CatalogTypeSchema>
 export type Catalog = z.infer<typeof CatalogSchema>
 export type Item = z.infer<typeof ItemSchema>
+export type Accessory = z.infer<typeof AccessorySchema>
 export type Vehicle = z.infer<typeof VehicleSchema>
 export type DocumentTypeName = z.infer<typeof DocumentTypeNameSchema>
 export type DocumentType = z.infer<typeof DocumentTypeSchema>
@@ -130,5 +155,6 @@ export type Reference = z.infer<typeof ReferenceSchema>
 export type PaymentTypeName = z.infer<typeof PaymentTypeNameSchema>
 export type PaymentType = z.infer<typeof PaymentTypeSchema>
 export type PaymentRecord = z.infer<typeof PaymentRecordSchema>
+export type Financing = z.infer<typeof FinancingSchema>
 export type RecordData = z.infer<typeof RecordDataSchema>
 export type GristRecord = z.infer<typeof GristRecordSchema>

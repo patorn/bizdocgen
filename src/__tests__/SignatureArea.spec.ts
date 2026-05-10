@@ -4,7 +4,7 @@ import { mount } from '@vue/test-utils'
 import SignatureArea from '../components/SignatureArea.vue'
 import type { GristRecord } from '../types/document-schema'
 
-function createRecord(documentType: 'Quotation' | 'Invoice'): GristRecord {
+function createRecord(documentType: 'Quotation' | 'Car Sale Agreement' | 'Invoice'): GristRecord {
   return {
     id: 1,
     Record: {
@@ -47,6 +47,18 @@ describe('SignatureArea', () => {
   it('renders quotation signatures with distinct signature types', () => {
     const wrapper = mount(SignatureArea, {
       props: { record: createRecord('Quotation') },
+    })
+
+    const sections = wrapper.findAll('.signature__section')
+
+    expect(sections).toHaveLength(2)
+    expect(sections[0]?.attributes('data-signature-type')).toBe('issuer')
+    expect(sections[1]?.attributes('data-signature-type')).toBe('approver')
+  })
+
+  it('renders car sale agreement signatures with distinct signature types', () => {
+    const wrapper = mount(SignatureArea, {
+      props: { record: createRecord('Car Sale Agreement') },
     })
 
     const sections = wrapper.findAll('.signature__section')

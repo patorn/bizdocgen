@@ -37,6 +37,15 @@ def serialize_item(item):
         "id": item.id,
     }
 
+def serialize_accessory(accessory):
+    return {
+        "Catalog": serialize_catalog(accessory.Catalog) if accessory.Catalog else None,
+        "Document_Code": accessory.Document_Code or None,
+        "Description": accessory.Description,
+        "Manual_Sort": accessory.Manual_Sort or None,
+        "id": accessory.id,
+    }
+
 def serialize_payment_method(pm):
     if not pm:
         return None
@@ -90,6 +99,23 @@ def serialize_document_type(document_type):
         "Thai_Name": document_type.Thai_Name or None,
     }
 
+def serialize_financing(financing):
+    if not financing:
+        return None
+    return {
+        "Net_Selling_Price": financing.Net_Selling_Price if financing.Net_Selling_Price is not None else None,
+        "Down_Payment_Percentage": financing.Down_Payment_Percentage if financing.Down_Payment_Percentage is not None else None,
+        "Down_Payment_Amount": financing.Down_Payment_Amount if financing.Down_Payment_Amount is not None else None,
+        "Hire_Purchase_Amount": financing.Hire_Purchase_Amount if financing.Hire_Purchase_Amount is not None else None,
+        "Installment_Plan_Term_Months": financing.Installment_Plan_Term_Months,
+        "Installment_Plan_Interest_Rate": financing.Installment_Plan_Interest_Rate,
+        "Installment_Plan_Monthly_Payment": financing.Installment_Plan_Monthly_Payment,
+        "Insurance_Company": financing.Insurance_Company or None,
+        "Insurance_Sum_Assured": financing.Insurance_Sum_Assured if financing.Insurance_Sum_Assured is not None else None,
+        "Insurance_Premium": financing.Insurance_Premium if financing.Insurance_Premium is not None else None,
+        "Accessories": [serialize_accessory(accessory) for accessory in financing.Accessories] if financing.Accessories else None,
+    }
+
 def serialize_record(doc):
     return {
         "Client": serialize_client(doc.Client),
@@ -106,6 +132,7 @@ def serialize_record(doc):
         "Signed_Document_URL": doc.Signed_Document_URL or None,
         "Tax": doc.Tax,
         "Vehicle": serialize_vehicle(doc.Vehicle) if doc.Vehicle else None,
+        "Financing": serialize_financing(doc.Financing) if doc.Financing else None,
     }
 
 return serialize_record(rec)

@@ -1,7 +1,7 @@
 <template>
   <footer class="signature">
-    <!-- Quotation: Two signature boxes -->
-    <div v-if="isQuotation" class="signature__grid">
+    <!-- Quotation and Car Sale Agreement: Two signature boxes -->
+    <div v-if="usesQuotationLayout" class="signature__grid">
       <div class="signature__section" data-signature-type="issuer">
         <div class="signature__text">เสนอราคาโดย</div>
         <div class="signature__line"></div>
@@ -59,8 +59,8 @@ const documentTypeName = computed(() => {
   return getDocumentTypeName(props.record.Record.Document_Type)
 })
 
-const isQuotation = computed(() => {
-  return documentTypeName.value === 'Quotation'
+const usesQuotationLayout = computed(() => {
+  return ['Quotation', 'Car Sale Agreement'].includes(documentTypeName.value)
 })
 
 const isReceipt = computed(() => {
@@ -78,7 +78,7 @@ const displayName = computed(() => {
   page-break-inside: avoid;
 }
 
-/* Quotation: Two signature boxes */
+/* Quotation and Car Sale Agreement: Two signature boxes */
 .signature__grid {
   display: flex;
   justify-content: space-between;

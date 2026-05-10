@@ -17,7 +17,11 @@
       <VehicleInfo v-if="record" :record="record" />
     </div>
 
+    <FinancingSection v-if="record?.Record.Financing" :record="record" />
+
     <ItemsTable v-if="record" :record="record" />
+
+    <AccessoriesSection v-if="record?.Record.Financing?.Accessories?.length" :record="record" />
 
     <TaxSummary v-if="record" :record="record" />
 
@@ -38,9 +42,11 @@
 import { computed } from 'vue'
 import type { GristRecord } from '../types/document-schema'
 import { getDocumentTypeName } from '../utils/document'
+import AccessoriesSection from './AccessoriesSection.vue'
 import ClientInfo from './ClientInfo.vue'
 import VehicleInfo from './VehicleInfo.vue'
 import DocumentHeader from './DocumentHeader.vue'
+import FinancingSection from './FinancingSection.vue'
 import ItemsTable from './ItemsTable.vue'
 import PaymentInfo from './PaymentInfo.vue'
 import PaymentRecords from './PaymentRecords.vue'
