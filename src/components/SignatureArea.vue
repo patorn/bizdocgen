@@ -60,7 +60,7 @@ const documentTypeName = computed(() => {
 })
 
 const usesQuotationLayout = computed(() => {
-  return ['Quotation', 'Car Sale Agreement'].includes(documentTypeName.value)
+  return documentTypeName.value != null && ['Quotation', 'Car Sale Agreement'].includes(documentTypeName.value)
 })
 
 const isReceipt = computed(() => {
