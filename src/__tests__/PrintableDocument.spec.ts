@@ -55,21 +55,18 @@ function createRecord(documentTypeName: 'Quotation' | 'Car Sale Agreement' | 'In
         Accessories: [
           {
             Catalog: { Type: 'Product', Code: 'ACC-001', Name: 'ฟิล์ม Lamina' },
-            Document_Code: 'DOC-101',
             Description: 'ฟิล์ม Lamina',
             Manual_Sort: 1,
             id: 101,
           },
           {
             Catalog: null,
-            Document_Code: null,
             Description: 'กรอบป้ายทะเบียน',
             Manual_Sort: 2,
             id: 102,
           },
           {
             Catalog: null,
-            Document_Code: null,
             Description: 'พรมพื้นรถ',
             Manual_Sort: 3,
             id: 103,

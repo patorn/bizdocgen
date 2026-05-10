@@ -1,18 +1,19 @@
 <template>
   <section class="items-section">
+    <h3 v-if="props.compact" class="items-section__title">เงื่อนไขการชำระเงิน</h3>
     <table class="items-table">
       <thead class="items-table__head">
         <tr class="items-table__row">
-          <th class="items-table__header items-table__header--number">ลำดับ</th>
+          <th v-if="!props.compact" class="items-table__header items-table__header--number">ลำดับ</th>
           <th class="items-table__header items-table__header--description">รายการ</th>
-          <th class="items-table__header items-table__header--quantity">จำนวน</th>
-          <th class="items-table__header items-table__header--unit-price">ราคาต่อหน่วย</th>
+          <th v-if="!props.compact" class="items-table__header items-table__header--quantity">จำนวน</th>
+          <th v-if="!props.compact" class="items-table__header items-table__header--unit-price">ราคาต่อหน่วย</th>
           <th class="items-table__header items-table__header--total">จำนวนเงิน</th>
         </tr>
       </thead>
       <tbody class="items-table__body">
         <tr v-for="(item, index) in viewModel.items" :key="item.id" class="items-table__row">
-          <td class="items-table__cell items-table__cell--number">{{ index + 1 }}</td>
+          <td v-if="!props.compact" class="items-table__cell items-table__cell--number">{{ index + 1 }}</td>
           <td class="items-table__cell items-table__cell--description">
             <div
               v-if="isMarkdown(item.description)"
@@ -31,8 +32,8 @@
               </span>
             </template>
           </td>
-          <td class="items-table__cell items-table__cell--quantity">{{ item.quantity }}</td>
-          <td class="items-table__cell items-table__cell--unit-price">
+          <td v-if="!props.compact" class="items-table__cell items-table__cell--quantity">{{ item.quantity }}</td>
+          <td v-if="!props.compact" class="items-table__cell items-table__cell--unit-price">
             {{ formatCurrency(item.unitPrice) }}
           </td>
           <td class="items-table__cell items-table__cell--total">
@@ -53,6 +54,7 @@ import { getViewModel } from '../utils/view-model'
 
 interface Props {
   record: GristRecord
+  compact?: boolean
 }
 
 const props = defineProps<Props>()
@@ -65,6 +67,12 @@ const viewModel = computed(() => {
 <style>
 .items-section {
   margin-bottom: var(--spacing-sm);
+}
+
+.items-section__title {
+  margin: 0 0 var(--spacing-sm) 0;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
 }
 
 .items-table {

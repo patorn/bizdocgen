@@ -54,7 +54,6 @@ export const ItemSchema = z.object({
 
 export const AccessorySchema = z.object({
   Catalog: CatalogSchema.nullish(),
-  Document_Code: z.string().nullish(),
   Description: z.string(),
   Manual_Sort: z.number().nullish(),
   id: z.number(),

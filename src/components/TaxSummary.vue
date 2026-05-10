@@ -1,7 +1,7 @@
 <template>
-  <section class="tax-summary">
-    <div class="tax-summary__table">
-      <div class="tax-summary__row">
+  <section class="tax-summary" :class="{ 'tax-summary--compact': props.compact }">
+    <div class="tax-summary__table" :class="{ 'tax-summary__table--compact': props.compact }">
+      <div v-if="!props.compact || taxInfo.label" class="tax-summary__row">
         <div class="tax-summary__label">ยอดรวม</div>
         <div class="tax-summary__amount">{{ formatCurrency(subtotal) }}</div>
       </div>
@@ -35,6 +35,7 @@ import { getViewModel } from '../utils/view-model'
 
 interface Props {
   record: GristRecord
+  compact?: boolean
 }
 
 const props = defineProps<Props>()
@@ -55,8 +56,16 @@ const total = computed(() => viewModel.value.total)
   justify-content: flex-end;
 }
 
+.tax-summary--compact {
+  margin-bottom: 0;
+}
+
 .tax-summary__table {
   width: 50%;
+}
+
+.tax-summary__table--compact {
+  width: 100%;
 }
 
 .tax-summary__row {

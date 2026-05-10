@@ -1,6 +1,6 @@
 <template>
   <section v-if="financing" class="financing-section" data-testid="financing-section">
-    <h3 class="financing-section__title">เงื่อนไขการชำระเงิน</h3>
+    <h3 class="financing-section__title">รายละเอียดการขาย</h3>
 
     <div class="financing-section__grid">
       <div class="financing-section__row">
@@ -8,13 +8,7 @@
         <span class="financing-section__value">{{ formatAmount(financing.Net_Selling_Price) }}</span>
       </div>
       <div class="financing-section__row">
-        <span class="financing-section__label">เงินดาวน์ (%)</span>
-        <span class="financing-section__value">
-          {{ formatPercentage(financing.Down_Payment_Percentage) }}
-        </span>
-      </div>
-      <div class="financing-section__row">
-        <span class="financing-section__label">เงินดาวน์ (บาท)</span>
+        <span class="financing-section__label">เงินดาวน์ ({{ formatPercentage(financing.Down_Payment_Percentage) }})</span>
         <span class="financing-section__value">{{ formatAmount(financing.Down_Payment_Amount) }}</span>
       </div>
       <div class="financing-section__row">
@@ -22,20 +16,8 @@
         <span class="financing-section__value">{{ formatAmount(financing.Hire_Purchase_Amount) }}</span>
       </div>
       <div class="financing-section__row">
-        <span class="financing-section__label">ผ่อนชำระ (งวด)</span>
-        <span class="financing-section__value">{{ financing.Installment_Plan_Term_Months }}</span>
-      </div>
-      <div class="financing-section__row">
-        <span class="financing-section__label">ดอกเบี้ย (%)</span>
-        <span class="financing-section__value">
-          {{ formatPercentage(financing.Installment_Plan_Interest_Rate) }}
-        </span>
-      </div>
-      <div class="financing-section__row">
-        <span class="financing-section__label">ค่างวดต่อเดือน</span>
-        <span class="financing-section__value">
-          {{ formatAmount(financing.Installment_Plan_Monthly_Payment) }}
-        </span>
+        <span class="financing-section__label">ผ่อนชำระ {{ financing.Installment_Plan_Term_Months }} งวด x ดอกเบี้ย {{ formatPercentage(financing.Installment_Plan_Interest_Rate) }}</span>
+        <span class="financing-section__value">{{ formatAmount(financing.Installment_Plan_Monthly_Payment) }}</span>
       </div>
       <div class="financing-section__row">
         <span class="financing-section__label">บริษัทประกัน</span>
@@ -87,6 +69,7 @@ function formatPercentage(value: number | null | undefined): string {
 
 <style>
 .financing-section {
+  container-type: inline-size;
   border: 1px solid var(--border-default);
   padding: var(--spacing-sm) var(--spacing-md);
   margin-bottom: var(--spacing-md);
@@ -122,7 +105,7 @@ function formatPercentage(value: number | null | undefined): string {
   text-align: right;
 }
 
-@media screen and (max-width: 900px) {
+@container (max-width: 500px) {
   .financing-section__grid {
     grid-template-columns: 1fr;
   }

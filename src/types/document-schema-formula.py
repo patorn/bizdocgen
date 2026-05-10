@@ -40,7 +40,6 @@ def serialize_item(item):
 def serialize_accessory(accessory):
     return {
         "Catalog": serialize_catalog(accessory.Catalog) if accessory.Catalog else None,
-        "Document_Code": accessory.Document_Code or None,
         "Description": accessory.Description,
         "Manual_Sort": accessory.Manual_Sort or None,
         "id": accessory.id,

@@ -22,12 +22,9 @@
           data-testid="accessory-item"
         >
           <span class="accessories-section__description">{{ accessory.Description }}</span>
-          <template v-if="accessory.Catalog?.Code || accessory.Document_Code">
+          <template v-if="accessory.Catalog?.Code">
             <span v-if="accessory.Catalog?.Code" class="accessories-section__tag">
               รหัสสินค้า: {{ accessory.Catalog.Code }}
-            </span>
-            <span v-if="accessory.Document_Code" class="accessories-section__tag">
-              เลขที่เอกสาร: {{ accessory.Document_Code }}
             </span>
           </template>
         </li>

@@ -17,13 +17,22 @@
       <VehicleInfo v-if="record" :record="record" />
     </div>
 
-    <FinancingSection v-if="record?.Record.Financing" :record="record" />
+    <div v-if="record?.Record.Financing" class="document__financing-items">
+      <div class="document__financing-left">
+        <FinancingSection :record="record" />
+      </div>
+      <div class="document__financing-right">
+        <ItemsTable :record="record" compact />
+        <TaxSummary :record="record" compact />
+      </div>
+    </div>
 
-    <ItemsTable v-if="record" :record="record" />
+    <template v-else-if="record">
+      <ItemsTable :record="record" />
+      <TaxSummary :record="record" />
+    </template>
 
     <AccessoriesSection v-if="record?.Record.Financing?.Accessories?.length" :record="record" />
-
-    <TaxSummary v-if="record" :record="record" />
 
     <PaymentRecords v-if="record?.Record.Payments?.length" :record="record" />
 
@@ -119,6 +128,19 @@ const paymentMethodName = computed(() => {
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-xl);
   align-items: start;
+}
+
+.document__financing-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+  align-items: start;
+  margin-bottom: var(--spacing-md);
+}
+
+.document__financing-left,
+.document__financing-right {
+  min-width: 0;
 }
 
 .document__payment-section {
