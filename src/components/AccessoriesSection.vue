@@ -72,6 +72,7 @@ const accessoryColumns = computed(() => {
 
 <style>
 .accessories-section {
+  container-type: inline-size;
   border: 1px solid var(--border-default);
   padding: var(--spacing-sm) var(--spacing-md);
   margin-bottom: var(--spacing-md);
@@ -107,11 +108,5 @@ const accessoryColumns = computed(() => {
   margin-left: 4px;
   color: var(--text-secondary);
   font-size: var(--font-size-sm);
-}
-
-@media screen and (max-width: 900px) {
-  .accessories-section__columns {
-    grid-template-columns: 1fr;
-  }
 }
 </style>
