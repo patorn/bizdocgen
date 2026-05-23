@@ -44,7 +44,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { GristRecord } from '../types/document-schema'
-import { formatCurrency } from '../utils/currency'
+import { formatNumber } from '../utils/currency'
 
 interface Props {
   record: GristRecord
@@ -59,7 +59,7 @@ function formatAmount(value: number | null | undefined): string {
     return '-'
   }
 
-  return formatCurrency(value)
+  return formatNumber(value)
 }
 
 function formatPercentage(value: number | null | undefined): string {

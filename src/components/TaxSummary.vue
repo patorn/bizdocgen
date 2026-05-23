@@ -3,7 +3,7 @@
     <div class="tax-summary__table" :class="{ 'tax-summary__table--compact': props.compact }">
       <div v-if="!props.compact || taxInfo.label" class="tax-summary__row">
         <div class="tax-summary__label">ยอดรวม</div>
-        <div class="tax-summary__amount">{{ formatCurrency(subtotal) }}</div>
+        <div class="tax-summary__amount">{{ formatNumber(subtotal) }}</div>
       </div>
 
       <div v-if="taxInfo.label" class="tax-summary__row">
@@ -12,14 +12,14 @@
           class="tax-summary__amount"
           :class="{ 'tax-summary__amount--negative': taxInfo.percentage < 0 }"
         >
-          {{ taxInfo.percentage < 0 ? '-' : '' }}{{ formatCurrency(Math.abs(taxInfo.amount)) }}
+          {{ taxInfo.percentage < 0 ? '-' : '' }}{{ formatNumber(Math.abs(taxInfo.amount)) }}
         </div>
       </div>
 
       <div class="tax-summary__row tax-summary__row--total">
         <div class="tax-summary__label">จำนวนเงินสุทธิ</div>
         <div class="tax-summary__amount">
-          {{ formatCurrency(total) }}
+          {{ formatNumber(total) }}
           <div class="tax-summary__baht-text">({{ formatBahtText(total) }})</div>
         </div>
       </div>
@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { GristRecord } from '../types/document-schema'
-import { formatBahtText, formatCurrency } from '../utils/currency'
+import { formatBahtText, formatNumber } from '../utils/currency'
 import { getViewModel } from '../utils/view-model'
 
 interface Props {

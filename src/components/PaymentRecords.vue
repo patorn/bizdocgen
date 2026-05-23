@@ -25,7 +25,7 @@
           </template>
         </span>
         <span class="payment-records__row-datetime">{{ formatDatetime(payment.Datetime) }}</span>
-        <span class="payment-records__row-amount">{{ formatCurrency(payment.Amount) }}</span>
+        <span class="payment-records__row-amount">{{ formatNumber(payment.Amount) }}</span>
       </div>
     </div>
 
@@ -34,13 +34,13 @@
         <div class="payment-records__summary-row">
           <div class="payment-records__summary-label">รวมชำระแล้ว</div>
           <div class="payment-records__summary-amount" data-testid="total-paid">
-            {{ formatCurrency(totalPaid) }}
+            {{ formatNumber(totalPaid) }}
           </div>
         </div>
         <div class="payment-records__summary-row payment-records__summary-row--balance">
           <div class="payment-records__summary-label">คงเหลือ</div>
           <div class="payment-records__summary-amount" data-testid="balance">
-            {{ formatCurrency(balance) }}
+            {{ formatNumber(balance) }}
           </div>
         </div>
       </div>
@@ -51,7 +51,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { GristRecord, PaymentMethod, PaymentRecord } from '../types/document-schema'
-import { formatCurrency } from '../utils/currency'
+import { formatNumber } from '../utils/currency'
 import { getViewModel } from '../utils/view-model'
 
 interface Props {

@@ -6,7 +6,7 @@
       <div v-else class="qr-section__loading">กำลังสร้าง QR Code...</div>
       <div class="qr-section__info">
         <div class="qr-section__info-item">PromptPay ID: {{ promptPayId }}</div>
-        <div class="qr-section__info-item">จำนวนเงิน: {{ formatCurrency(viewModel.total) }}</div>
+        <div class="qr-section__info-item">จำนวนเงิน: {{ formatNumber(viewModel.total) }}</div>
       </div>
     </div>
   </section>
@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
 import type { GristRecord } from '../types/document-schema'
-import { formatCurrency } from '../utils/currency'
+import { formatNumber } from '../utils/currency'
 import { generatePromptPayQR } from '../utils/promptpay'
 import { getViewModel } from '../utils/view-model'
 

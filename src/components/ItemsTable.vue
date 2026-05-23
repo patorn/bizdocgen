@@ -35,10 +35,10 @@
           </td>
           <td v-if="!props.compact" class="items-table__cell items-table__cell--quantity">{{ item.quantity }}</td>
           <td v-if="!props.compact" class="items-table__cell items-table__cell--unit-price">
-            {{ formatCurrency(item.unitPrice) }}
+            {{ formatNumber(item.unitPrice) }}
           </td>
           <td class="items-table__cell items-table__cell--total">
-            {{ formatCurrency(item.total) }}
+            {{ formatNumber(item.total) }}
           </td>
         </tr>
       </tbody>
@@ -49,7 +49,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { GristRecord } from '../types/document-schema'
-import { formatCurrency } from '../utils/currency'
+import { formatNumber } from '../utils/currency'
 import { isMarkdown, renderMarkdown } from '../utils/markdown'
 import { getViewModel } from '../utils/view-model'
 

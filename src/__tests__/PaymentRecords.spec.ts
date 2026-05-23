@@ -163,7 +163,7 @@ describe('PaymentRecords', () => {
     expect(balanceEl.exists()).toBe(true)
 
     // Total paid = 700, balance = 1000 - 700 = 300
-    // Formatted as Thai currency (฿700.00 etc.)
+    // Formatted as Thai number with 2 decimal places.
     expect(totalPaidEl.text()).toContain('700')
     expect(balanceEl.text()).toContain('300')
   })
