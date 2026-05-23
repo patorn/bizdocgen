@@ -107,6 +107,7 @@ export const FinancingSchema = z.object({
   Down_Payment_Percentage: z.number().nullish(),
   Down_Payment_Amount: z.number().nullish(),
   Hire_Purchase_Amount: z.number().nullish(),
+  Financing_Company: z.string().nullish(),
   Installment_Plan_Term_Months: z.number(),
   Installment_Plan_Interest_Rate: z.number(),
   Installment_Plan_Monthly_Payment: z.number(),

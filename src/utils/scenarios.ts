@@ -796,6 +796,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Down_Payment_Percentage: 20,
           Down_Payment_Amount: 130800,
           Hire_Purchase_Amount: 523200,
+          Financing_Company: 'บริษัท ตังค์ไว จำกัด',
           Installment_Plan_Term_Months: 60,
           Installment_Plan_Interest_Rate: 3.69,
           Installment_Plan_Monthly_Payment: 9892,

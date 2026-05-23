@@ -16,6 +16,10 @@
         <span class="financing-section__value">{{ formatAmount(financing.Hire_Purchase_Amount) }}</span>
       </div>
       <div class="financing-section__row">
+        <span class="financing-section__label">บริษัทไฟแนนซ์</span>
+        <span class="financing-section__value">{{ financing.Financing_Company ?? '-' }}</span>
+      </div>
+      <div class="financing-section__row">
         <span class="financing-section__label">ผ่อนชำระ {{ financing.Installment_Plan_Term_Months }} งวด x ดอกเบี้ย {{ formatPercentage(financing.Installment_Plan_Interest_Rate) }}</span>
         <span class="financing-section__value">{{ formatAmount(financing.Installment_Plan_Monthly_Payment) }}</span>
       </div>

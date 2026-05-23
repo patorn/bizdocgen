@@ -106,6 +106,7 @@ def serialize_financing(financing):
         "Down_Payment_Percentage": financing.Down_Payment_Percentage if financing.Down_Payment_Percentage is not None else None,
         "Down_Payment_Amount": financing.Down_Payment_Amount if financing.Down_Payment_Amount is not None else None,
         "Hire_Purchase_Amount": financing.Hire_Purchase_Amount if financing.Hire_Purchase_Amount is not None else None,
+        "Financing_Company": financing.Financing_Company or None,
         "Installment_Plan_Term_Months": financing.Installment_Plan_Term_Months,
         "Installment_Plan_Interest_Rate": financing.Installment_Plan_Interest_Rate,
         "Installment_Plan_Monthly_Payment": financing.Installment_Plan_Monthly_Payment,
