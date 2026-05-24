@@ -10,16 +10,16 @@
         data-testid="payment-record-row"
       >
         <span class="payment-records__row-number">{{ index + 1 }}.</span>
-        <span class="payment-records__row-type">{{ getPaymentMethod(payment)?.Type?.Thai_Name ?? getPaymentMethod(payment)?.Type?.Name ?? '' }}</span>
+        <span class="payment-records__row-type">{{ getPaymentMethodTypeLabel(payment) }}</span>
         <span class="payment-records__row-details">
-          <template v-if="getPaymentMethod(payment)?.Type?.Name === 'Cheque'">
+          <template v-if="isPaymentMethodType(payment, 'Cheque')">
             ธนาคาร {{ getPaymentMethod(payment)?.Bank }} สาขา {{ getPaymentMethod(payment)?.Branch }} เลขที่เช็ค
             {{ payment.Transaction_Number }}
           </template>
-          <template v-else-if="getPaymentMethod(payment)?.Type?.Name === 'Credit Card'">
+          <template v-else-if="isPaymentMethodType(payment, 'Credit Card')">
             {{ getPaymentMethod(payment)?.Name }}
           </template>
-          <template v-else-if="getPaymentMethod(payment)?.Type?.Name === 'Bank Transfer'">
+          <template v-else-if="isPaymentMethodType(payment, 'Bank Transfer')">
             ธนาคาร {{ getPaymentMethod(payment)?.Bank }} สาขา {{ getPaymentMethod(payment)?.Branch }} บัญชี
             {{ getPaymentMethod(payment)?.Account_Number }}
           </template>
@@ -71,6 +71,15 @@ const balance = computed(() => documentTotal.value - totalPaid.value)
 function getPaymentMethod(payment: PaymentRecord): PaymentMethod | null | undefined {
   // Fallback to document-level method for older records without per-payment link.
   return payment.Payment_Method ?? props.record.Record.Payment_Method
+}
+
+function getPaymentMethodTypeLabel(payment: PaymentRecord): string {
+  const method = getPaymentMethod(payment)
+  return method?.Type?.Thai_Name ?? method?.Type?.Name ?? method?.Name ?? ''
+}
+
+function isPaymentMethodType(payment: PaymentRecord, typeName: string): boolean {
+  return getPaymentMethod(payment)?.Type?.Name === typeName
 }
 
 function formatDatetime(datetime: string): string {

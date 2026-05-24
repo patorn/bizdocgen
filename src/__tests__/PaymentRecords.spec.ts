@@ -125,6 +125,20 @@ describe('PaymentRecords', () => {
     expect(wrapper.text()).toContain('Visa')
   })
 
+  it('falls back to payment method name when type is missing', () => {
+    const record = createRecord([
+      {
+        Amount: 1200,
+        Datetime: '2025-08-09T10:00:00.000Z',
+        Payment_Method: { Type: null, Name: 'พร้อมเพย์' },
+      },
+    ])
+
+    const wrapper = mount(PaymentRecords, { props: { record } })
+
+    expect(wrapper.text()).toContain('พร้อมเพย์')
+  })
+
   it('shows type-specific details for Bank Transfer', () => {
     const record = createRecord([
       {
