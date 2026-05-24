@@ -98,6 +98,45 @@ describe('GristRecordSchema', () => {
     })
   })
 
+  it('parses a Vehicle Make reference object with Name', () => {
+    const parsed = GristRecordSchema.parse({
+      ...createRecord({ Name: 'Car Sale Agreement' }),
+      Record: {
+        ...createRecord({ Name: 'Car Sale Agreement' }).Record,
+        Vehicle: {
+          Make: { Name: 'Toyota' },
+          Model: 'Corolla Cross',
+          Year: 2023,
+          Color: 'White Pearl',
+          VIN: 'MR2KZ1234P0001234',
+          License_Plate: '4กข 1234',
+          Mileage: 32500,
+          Engine_Number: '2ZR-FBE-987654',
+          Purchase_Order_Number: 'PO-2023-00456',
+          Sales_Order_Number: 'SO-2023-00789',
+        },
+      },
+    })
+
+    expect(parsed.Record.Vehicle?.Make).toEqual({ Name: 'Toyota' })
+  })
+
+  it('rejects a Vehicle Make string', () => {
+    const result = GristRecordSchema.safeParse({
+      ...createRecord({ Name: 'Car Sale Agreement' }),
+      Record: {
+        ...createRecord({ Name: 'Car Sale Agreement' }).Record,
+        Vehicle: {
+          Make: 'Toyota',
+          Model: 'Corolla Cross',
+          Year: 2023,
+        },
+      },
+    })
+
+    expect(result.success).toBe(false)
+  })
+
   it('parses car sale agreement financing with accessory objects', () => {
     const parsed = GristRecordSchema.parse({
       ...createRecord({ Name: 'Car Sale Agreement' }),

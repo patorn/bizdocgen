@@ -66,11 +66,18 @@ def serialize_payment(payment):
         "Transaction_Number": payment.Transaction_Number or None,
     }
 
+def serialize_make(make):
+    if not make:
+        return None
+    return {
+        "Name": make.Name,
+    }
+
 def serialize_vehicle(vehicle):
     if not vehicle:
         return None
     return {
-        "Make": vehicle.Make,
+        "Make": serialize_make(vehicle.Make),
         "Model": vehicle.Model,
         "Year": vehicle.Year,
         "Color": vehicle.Color or None,

@@ -241,7 +241,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Tax_ID: '1234567890123',
         },
         Vehicle: {
-          Make: 'Toyota',
+          Make: { Name: 'Toyota' },
           Model: 'Corolla Cross',
           Year: 2023,
           Color: 'White Pearl',
@@ -780,7 +780,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Tax_ID: '1234567890123',
         },
         Vehicle: {
-          Make: 'Honda',
+          Make: { Name: 'Honda' },
           Model: 'Jazz',
           Year: 2023,
           Color: 'ขาว',

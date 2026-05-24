@@ -2,7 +2,7 @@
   <section v-if="vehicle" class="vehicle-info" data-testid="vehicle-info">
     <h3 class="vehicle-info__title">ข้อมูลรถ</h3>
     <div class="vehicle-info__content">
-      <div class="vehicle-info__name">{{ vehicle.Make }} {{ vehicle.Model }} - {{ vehicle.Color }} ({{ vehicle.Year }})</div>
+      <div class="vehicle-info__name">{{ vehicle.Make.Name }} {{ vehicle.Model }} - {{ vehicle.Color }}</div>
       <div class="vehicle-info__details">
         <div v-if="vehicle.VIN" class="vehicle-info__detail-item">
           <span class="vehicle-info__label">เลขตัวถัง</span>

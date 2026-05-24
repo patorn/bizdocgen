@@ -59,8 +59,12 @@ export const AccessorySchema = z.object({
   id: z.number(),
 })
 
+export const MakeSchema = z.object({
+  Name: z.string(),
+})
+
 export const VehicleSchema = z.object({
-  Make: z.string(),
+  Make: MakeSchema,
   Model: z.string(),
   Year: z.number(),
   Color: z.string().nullish(),
@@ -148,6 +152,7 @@ export type CatalogType = z.infer<typeof CatalogTypeSchema>
 export type Catalog = z.infer<typeof CatalogSchema>
 export type Item = z.infer<typeof ItemSchema>
 export type Accessory = z.infer<typeof AccessorySchema>
+export type Make = z.infer<typeof MakeSchema>
 export type Vehicle = z.infer<typeof VehicleSchema>
 export type DocumentTypeName = z.infer<typeof DocumentTypeNameSchema>
 export type DocumentType = z.infer<typeof DocumentTypeSchema>
