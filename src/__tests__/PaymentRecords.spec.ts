@@ -95,6 +95,7 @@ describe('PaymentRecords', () => {
       {
         Amount: 5000,
         Datetime: '2025-08-09T10:00:00.000Z',
+        Name: 'คุณสมชาย',
         Payment_Method: {
           ...linkedPaymentMethod,
           Type: { Name: 'Cheque', Thai_Name: 'เช็ค' },
@@ -109,6 +110,25 @@ describe('PaymentRecords', () => {
 
     expect(wrapper.text()).toContain('CHQ-1234')
     expect(wrapper.text()).toContain('ธนาคารกรุงเทพ')
+    expect(wrapper.text()).toContain('ผจ. คุณสมชาย')
+  })
+
+  it('does not show branch label when branch is missing', () => {
+    const record = createRecord([
+      {
+        Amount: 4000,
+        Datetime: '2025-08-09T10:00:00.000Z',
+        Payment_Method: {
+          ...linkedPaymentMethod,
+          Branch: null,
+        },
+      },
+    ])
+
+    const wrapper = mount(PaymentRecords, { props: { record } })
+
+    expect(wrapper.text()).toContain('ธนาคารไทยพาณิชย์')
+    expect(wrapper.text()).not.toContain('สาขา')
   })
 
   it('shows type-specific details for Credit Card', () => {
@@ -116,6 +136,7 @@ describe('PaymentRecords', () => {
       {
         Amount: 3000,
         Datetime: '2025-08-09T10:00:00.000Z',
+        Name: 'คุณมาลี',
         Payment_Method: { Type: { Name: 'Credit Card', Thai_Name: 'บัตรเครดิต' }, Name: 'Visa' },
       },
     ])
@@ -123,6 +144,7 @@ describe('PaymentRecords', () => {
     const wrapper = mount(PaymentRecords, { props: { record } })
 
     expect(wrapper.text()).toContain('Visa')
+    expect(wrapper.text()).toContain('ผจ. คุณมาลี')
   })
 
   it('falls back to payment method name when type is missing', () => {

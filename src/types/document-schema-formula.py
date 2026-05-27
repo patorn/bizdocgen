@@ -62,6 +62,7 @@ def serialize_payment(payment):
     return {
         "Amount": payment.Amount,
         "Datetime": str(payment.Datetime) if payment.Datetime else "",
+        "Name": payment.Name or None,
         "Payment_Method": serialize_payment_method(payment.Payment_Method),
         "Transaction_Number": payment.Transaction_Number or None,
     }

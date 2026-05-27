@@ -73,11 +73,12 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           {
             Amount: 20000,
             Datetime: '2025-07-21T09:30:00.000Z',
+            Name: 'โปร แก้ได้หมด',
             Payment_Method: {
               Type: { Name: 'Bank Transfer', Thai_Name: 'โอนเงิน' },
               Account_Holder: 'นาย โปร แก้ได้หมด',
               Account_Number: '111-1-11111-1',
-              Bank: 'ธนาคารไทยพาณิชย์',
+              Bank: 'ไทยพาณิชย์',
               Branch: 'เซ็นทรัลเวิลด์',
               Name: 'บัญชีหลัก',
               PromptPay: '0891234567',
@@ -86,6 +87,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           {
             Amount: 17185.2,
             Datetime: '2025-07-21T14:00:00.000Z',
+            Name: 'บริษัท กลุ่มเมฆมันส์ จำกัด',
             Payment_Method: {
               Type: { Name: 'Cash', Thai_Name: 'เงินสด' },
               Name: 'เงินสด',
@@ -152,6 +154,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           {
             Amount: 15000,
             Datetime: '2025-06-15T10:00:00.000Z',
+            Name: 'หจก. นอนน้อยแต่รวยมาก',
             Payment_Method: {
               Type: { Name: 'Cheque', Thai_Name: 'เช็ค' },
               Account_Holder: 'นาย โปร แก้ได้หมด',
@@ -166,6 +169,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           {
             Amount: 14100,
             Datetime: '2025-06-15T11:30:00.000Z',
+            Name: 'หจก. นอนน้อยแต่รวยมาก',
             Payment_Method: {
               Type: { Name: 'Credit Card', Thai_Name: 'บัตรเครดิต' },
               Name: 'Visa',

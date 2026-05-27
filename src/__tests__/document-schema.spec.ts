@@ -229,6 +229,7 @@ describe('PaymentRecordSchema', () => {
     const result = PaymentRecordSchema.safeParse({
       Amount: 10000,
       Datetime: '2025-07-21T09:00:00.000Z',
+      Name: 'คุณสมชาย',
       Payment_Method: {
         Type: { Name: 'Cheque', Thai_Name: 'เช็ค' },
         Bank: 'ธนาคารกรุงเทพ',
@@ -244,6 +245,7 @@ describe('PaymentRecordSchema', () => {
     }
 
     expect(result.data.Transaction_Number).toBe('CHQ-001')
+    expect(result.data.Name).toBe('คุณสมชาย')
   })
 
   it('parses a Credit Card payment record', () => {

@@ -13,15 +13,21 @@
         <span class="payment-records__row-type">{{ getPaymentMethodTypeLabel(payment) }}</span>
         <span class="payment-records__row-details">
           <template v-if="isPaymentMethodType(payment, 'Cheque')">
-            ธนาคาร {{ getPaymentMethod(payment)?.Bank }} สาขา {{ getPaymentMethod(payment)?.Branch }} เลขที่เช็ค
-            {{ payment.Transaction_Number }}
+            {{ formatBankBranch(payment) }}
+            {{ formatLabelValue('เลขที่เช็ค', payment.Transaction_Number) }}
+            {{ formatLabelValue('ผจ.', payment.Name) }}
           </template>
           <template v-else-if="isPaymentMethodType(payment, 'Credit Card')">
             {{ getPaymentMethod(payment)?.Name }}
+            {{ formatLabelValue('ผจ.', payment.Name) }}
           </template>
           <template v-else-if="isPaymentMethodType(payment, 'Bank Transfer')">
-            ธนาคาร {{ getPaymentMethod(payment)?.Bank }} สาขา {{ getPaymentMethod(payment)?.Branch }} บัญชี
-            {{ getPaymentMethod(payment)?.Account_Number }}
+            {{ formatBankBranch(payment) }}
+            {{ formatLabelValue('บัญชี', getPaymentMethod(payment)?.Account_Number) }}
+            {{ formatLabelValue('ผจ.', payment.Name) }}
+          </template>
+          <template v-else>
+            {{ formatLabelValue('ผจ.', payment.Name) }}
           </template>
         </span>
         <span class="payment-records__row-datetime">{{ formatDatetime(payment.Datetime) }}</span>
@@ -80,6 +86,16 @@ function getPaymentMethodTypeLabel(payment: PaymentRecord): string {
 
 function isPaymentMethodType(payment: PaymentRecord, typeName: string): boolean {
   return getPaymentMethod(payment)?.Type?.Name === typeName
+}
+
+function formatBankBranch(payment: PaymentRecord): string {
+  const method = getPaymentMethod(payment)
+  if (!method?.Bank) return ''
+  return method.Branch ? `ธ. ${method.Bank} สาขา ${method.Branch}` : `ธ. ${method.Bank}`
+}
+
+function formatLabelValue(label: string, value: string | null | undefined): string {
+  return value ? `${label} ${value}` : ''
 }
 
 function formatDatetime(datetime: string): string {

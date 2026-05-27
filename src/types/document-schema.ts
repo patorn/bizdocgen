@@ -100,6 +100,7 @@ export const ReferenceSchema = z
 export const PaymentRecordSchema = z.object({
   Amount: z.number(),
   Datetime: z.string(),
+  Name: z.string().nullish(),
   // Link to payment method row/details (carries Type, bank details, etc.)
   Payment_Method: PaymentMethodSchema.nullish(),
   // Cheque only
