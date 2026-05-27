@@ -1,5 +1,6 @@
 <template>
   <section v-if="viewModel.remarks" class="remarks-section">
+    <h3 class="remarks-section__title">หมายเหตุ</h3>
     <div class="remarks-section__content" v-html="renderMarkdown(viewModel.remarks)" />
   </section>
 </template>
