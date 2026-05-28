@@ -15,19 +15,19 @@
           <template v-if="isPaymentMethodType(payment, 'Cheque')">
             {{ formatBankBranch(payment) }}
             {{ formatLabelValue('เลขที่เช็ค', payment.Transaction_Number) }}
-            {{ formatLabelValue('ชื่อ', payment.Name) }}
+            {{ formatLabelValue('', payment.Name) }}
           </template>
           <template v-else-if="isPaymentMethodType(payment, 'Credit Card')">
             {{ getPaymentMethod(payment)?.Name }}
-            {{ formatLabelValue('ชื่อ', payment.Name) }}
+            {{ formatLabelValue('', payment.Name) }}
           </template>
           <template v-else-if="isPaymentMethodType(payment, 'Bank Transfer')">
             {{ formatBankBranch(payment) }}
             {{ formatLabelValue('บัญชี', getPaymentMethod(payment)?.Account_Number) }}
-            {{ formatLabelValue('ชื่อ', payment.Name) }}
+            {{ formatLabelValue('', payment.Name) }}
           </template>
           <template v-else>
-            {{ formatLabelValue('ชื่อ', payment.Name) }}
+            {{ formatLabelValue('', payment.Name) }}
           </template>
         </span>
         <span class="payment-records__row-datetime">{{ formatDatetime(payment.Datetime) }}</span>
