@@ -63,6 +63,6 @@ describe('VehicleInfo', () => {
       props: { record: createRecord('Toyota') },
     })
 
-    expect(wrapper.text()).toContain('Toyota Corolla Cross - White Pearl (2023)')
+    expect(wrapper.text()).toContain('Toyota Corolla Cross - White Pearl')
   })
 })

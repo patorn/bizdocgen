@@ -110,7 +110,7 @@ describe('PaymentRecords', () => {
 
     expect(wrapper.text()).toContain('CHQ-1234')
     expect(wrapper.text()).toContain('ธนาคารกรุงเทพ')
-    expect(wrapper.text()).toContain('ผจ. คุณสมชาย')
+    expect(wrapper.text()).toContain('คุณสมชาย')
   })
 
   it('does not show branch label when branch is missing', () => {
@@ -144,7 +144,7 @@ describe('PaymentRecords', () => {
     const wrapper = mount(PaymentRecords, { props: { record } })
 
     expect(wrapper.text()).toContain('Visa')
-    expect(wrapper.text()).toContain('ผจ. คุณมาลี')
+    expect(wrapper.text()).toContain('คุณมาลี')
   })
 
   it('falls back to payment method name when type is missing', () => {

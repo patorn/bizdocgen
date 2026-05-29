@@ -306,11 +306,11 @@ describe('PaymentRecordSchema', () => {
   })
 
   it('parses Record when it is a JSON string', () => {
-    const objectRecord = createRecord('Receipt')
+    const objectRecord = createRecord({ Name: 'Receipt' })
     const stringRecord = { id: 1, Record: JSON.stringify(objectRecord.Record) }
     const parsed = GristRecordSchema.parse(stringRecord)
 
-    expect(parsed.Record.Document_Type).toEqual(['Receipt'])
+    expect(parsed.Record.Document_Type).toEqual({ Name: 'Receipt' })
     expect(parsed.Record.Number).toBe('TEST-001')
     expect(parsed.Record.Items).toHaveLength(1)
   })
@@ -322,7 +322,7 @@ describe('PaymentRecordSchema', () => {
   })
 
   it('accepts Actions_Data as an optional field', () => {
-    const input = createRecord('Quotation')
+    const input = createRecord({ Name: 'Quotation' })
     const parsed = GristRecordSchema.parse({
       ...input,
       Record: {
@@ -349,7 +349,7 @@ describe('PaymentRecordSchema', () => {
   })
 
   it('allows Actions_Data with zero actions', () => {
-    const input = createRecord('Quotation')
+    const input = createRecord({ Name: 'Quotation' })
     const parsed = GristRecordSchema.parse({
       ...input,
       Record: { ...input.Record, Actions_Data: { actions: [] } },
@@ -360,7 +360,7 @@ describe('PaymentRecordSchema', () => {
   })
 
   it('handles record missing Actions_Data gracefully', () => {
-    const parsed = GristRecordSchema.parse(createRecord('Quotation'))
+    const parsed = GristRecordSchema.parse(createRecord({ Name: 'Quotation' }))
 
     expect(parsed.Record.Actions_Data).toBeUndefined()
   })
