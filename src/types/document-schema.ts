@@ -122,6 +122,22 @@ export const FinancingSchema = z.object({
   Accessories: z.array(AccessorySchema).nullish(),
 })
 
+export const ActionItemSchema = z.object({
+  table: z.string(),
+  records: z.array(z.record(z.string(), z.unknown())),
+})
+
+export const ActionSchema = z.object({
+  title: z.string(),
+  table: z.string(),
+  record: z.record(z.string(), z.unknown()),
+  items: ActionItemSchema.optional(),
+})
+
+export const ActionsDataSchema = z.object({
+  actions: z.array(ActionSchema),
+})
+
 export const RecordDataSchema = z.object({
   Client: ClientSchema,
   Credit_Term: z.string().nullish(),
@@ -138,11 +154,21 @@ export const RecordDataSchema = z.object({
   Signed_Document_URL: z.union([z.url(), z.literal('')]).nullish(),
   Vehicle: VehicleSchema.nullish(),
   Financing: FinancingSchema.nullish(),
+  Actions_Data: ActionsDataSchema.optional(),
 })
 
 export const GristRecordSchema = z.object({
   id: z.number(),
-  Record: RecordDataSchema,
+  Record: z.preprocess((val) => {
+    if (typeof val === 'string') {
+      try {
+        return JSON.parse(val)
+      } catch {
+        return val
+      }
+    }
+    return val
+  }, RecordDataSchema),
 })
 
 // TypeScript types derived from Zod schemas
@@ -164,3 +190,6 @@ export type PaymentRecord = z.infer<typeof PaymentRecordSchema>
 export type Financing = z.infer<typeof FinancingSchema>
 export type RecordData = z.infer<typeof RecordDataSchema>
 export type GristRecord = z.infer<typeof GristRecordSchema>
+export type ActionItem = z.infer<typeof ActionItemSchema>
+export type Action = z.infer<typeof ActionSchema>
+export type ActionsData = z.infer<typeof ActionsDataSchema>
