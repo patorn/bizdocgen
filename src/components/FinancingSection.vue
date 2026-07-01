@@ -67,7 +67,9 @@ function formatPercentage(value: number | null | undefined): string {
     return '-'
   }
 
-  return `${value.toLocaleString('th-TH', { maximumFractionDigits: 2 })}%`
+  const normalizedValue = Math.abs(value) <= 1 ? value * 100 : value
+
+  return `${normalizedValue.toLocaleString('th-TH', { maximumFractionDigits: 2 })}%`
 }
 </script>
 
