@@ -87,14 +87,14 @@ describe('GristRecordSchema', () => {
       createRecord({
         Name: 'Car Sale Agreement',
         Abbr: 'CSA',
-        Thai_Name: 'สัญญาซื้อขายรถยนต์',
+        Thai_Name: 'สัญญาขายรถยนต์',
       }),
     )
 
     expect(parsed.Record.Document_Type).toEqual({
       Name: 'Car Sale Agreement',
       Abbr: 'CSA',
-      Thai_Name: 'สัญญาซื้อขายรถยนต์',
+      Thai_Name: 'สัญญาขายรถยนต์',
     })
   })
 

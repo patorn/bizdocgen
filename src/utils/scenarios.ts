@@ -793,7 +793,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
     },
   },
   {
-    title: 'สัญญาซื้อขายรถยนต์ — ไฟแนนซ์พร้อมอุปกรณ์ตกแต่งรถ',
+    title: 'สัญญาขายรถยนต์ — ไฟแนนซ์พร้อมอุปกรณ์ตกแต่งรถ',
     slug: 'quotation-financing-accessories-car',
     data: {
       id: 111,
@@ -807,7 +807,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
         Document_Type: {
           Name: 'Car Sale Agreement',
           Abbr: 'CSA',
-          Thai_Name: 'สัญญาซื้อขายรถยนต์',
+          Thai_Name: 'สัญญาขายรถยนต์',
         },
         Items: [
           {
