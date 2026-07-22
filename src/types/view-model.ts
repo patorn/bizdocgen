@@ -27,17 +27,13 @@ export interface PaymentInfo {
   bankDetails: BankInfo | null
 }
 
-export interface ReferenceInfo {
-  number: string | null
-}
-
 export interface DocumentViewModel {
   items: DisplayItem[]
   subtotal: number
   tax: TaxInfo
   total: number
   paymentInfo: PaymentInfo
-  reference: ReferenceInfo
+  referenceNumbers: string[]
   creditTerm: string | null
   remarks: string | null
 }

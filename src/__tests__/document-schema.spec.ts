@@ -36,7 +36,7 @@ function createRecord(documentType: unknown) {
         Tax_ID: '9876543210987',
         id: 4,
       },
-      Reference: null,
+      Reference_List: null,
       Remarks: null,
       Signed_Document_URL: '',
       Tax: 0.07,
@@ -46,6 +46,24 @@ function createRecord(documentType: unknown) {
 }
 
 describe('GristRecordSchema', () => {
+  it('parses all documents in Reference_List', () => {
+    const baseRecord = createRecord({ Name: 'Invoice' })
+    const record = {
+      ...baseRecord,
+      Record: {
+        ...baseRecord.Record,
+        Reference_List: [{ Number: 'QT-001' }, { Number: 'PO-002' }],
+      },
+    }
+
+    const parsed = GristRecordSchema.parse(record)
+
+    expect(parsed.Record.Reference_List).toEqual([
+      { Number: 'QT-001' },
+      { Number: 'PO-002' },
+    ])
+  })
+
   it('parses a Document_Type reference object with Name and Abbr', () => {
     const parsed = GristRecordSchema.parse(createRecord({ Name: 'Receipt', Abbr: 'RCPT' }))
 

@@ -36,7 +36,7 @@ function createRecord(documentTypeName: 'Quotation' | 'Car Sale Agreement' | 'In
         Personnel_Name: 'Test Provider',
         Tax_ID: '9876543210987',
       },
-      Reference: null,
+      Reference_List: null,
       Remarks: null,
       Signed_Document_URL: '',
       Tax: 0,
@@ -79,6 +79,19 @@ function createRecord(documentTypeName: 'Quotation' | 'Car Sale Agreement' | 'In
 }
 
 describe('PrintableDocument financing and accessories sections', () => {
+  it('renders every document in the reference list', () => {
+    const record = createRecord('Invoice')
+    record.Record.Reference_List = [{ Number: 'QT-001' }, { Number: 'PO-002' }]
+
+    const wrapper = mount(PrintableDocument, {
+      props: { record },
+    })
+
+    expect(wrapper.get('[data-testid="document-reference-list"]').text()).toBe(
+      'อ้างอิง: QT-001, PO-002',
+    )
+  })
+
   it('renders financing above items and accessories below items for car sale agreement', () => {
     const wrapper = mount(PrintableDocument, {
       props: { record: createRecord('Car Sale Agreement') },

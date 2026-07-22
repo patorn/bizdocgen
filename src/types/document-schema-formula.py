@@ -97,6 +97,11 @@ def serialize_reference(ref):
         "Number": ref.Number,
     }
 
+def serialize_reference_list(refs):
+    if not refs:
+        return None
+    return [serialize_reference(ref) for ref in refs]
+
 def serialize_document_type(document_type):
     if not document_type:
         return None
@@ -135,7 +140,7 @@ def serialize_record(doc):
         "Payment_Method": serialize_payment_method(doc.Payment_Method),
         "Payments": [serialize_payment(payment) for payment in doc.Payments] if doc.Payments else None,
         "Provider": serialize_provider(doc.Provider),
-        "Reference": serialize_reference(doc.Reference),
+        "Reference_List": serialize_reference_list(doc.Reference_List),
         "Remarks": doc.Remarks or None,
         "Signed_Document_URL": doc.Signed_Document_URL or None,
         "Tax": doc.Tax,

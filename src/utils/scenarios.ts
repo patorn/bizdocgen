@@ -63,9 +63,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Personnel_Name: 'นาย โปร แก้ได้หมด',
           Tax_ID: '1234567890123',
         },
-        Reference: {
-          Number: 'INC-42-K8S',
-        },
+        Reference_List: [{ Number: 'INC-42-K8S' }, { Number: 'INC-42-K9S' }],
         Remarks:
           'ขอบคุณที่เรียกใช้บริการรอบดึก — ระบบกลับมานิ่งแล้ว ✅\n\n> Tip: โปรดอย่ากด kubectl delete all อีกนะครับ',
         Tax: 0.07,
@@ -145,9 +143,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Personnel_Name: 'นาย โปร แก้ได้หมด',
           Tax_ID: '1234567890123',
         },
-        Reference: {
-          Number: 'PO-EXC-0009',
-        },
+        Reference_List: [{ Number: 'PO-EXC-0009' }],
         Remarks: 'กรุณาหักภาษี ณ ที่จ่าย 3% และแนบหนังสือรับรอง',
         Tax: -0.03,
         Payments: [
@@ -256,7 +252,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Purchase_Order_Number: 'PO-2023-00456',
           Sales_Order_Number: 'SO-2023-00789',
         },
-        Reference: null,
+        Reference_List: null,
         Remarks:
           'ใบเสนอราคานี้มีอายุ 30 วัน\n\n> หมายเหตุ: ถ้าลูกค้าหัวเราะระหว่างอบรม แปลว่าเข้าใจแล้ว',
         Tax: 0,
@@ -275,7 +271,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
                 Credit_Term: '30 วัน',
                 Remarks:
                   '### หมายเหตุ\nใบเสนอราคานี้มีอายุ 30 วัน\n\n> หมายเหตุ: ถ้าลูกค้าหัวเราะระหว่างอบรม แปลว่าเข้าใจแล้ว',
-                Reference: { Number: 'QT-2025-0042' },
+                Reference_List: [{ Number: 'QT-2025-0042' }],
               },
               items: {
                 table: 'Items',
@@ -350,7 +346,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Personnel_Name: 'นาย โปร แก้ได้หมด',
           Tax_ID: '1234567890123',
         },
-        Reference: null,
+        Reference_List: null,
         Remarks: 'จดรหัสใหม่ไว้ใต้เราเตอร์แล้วนะครับ',
         Tax: 0,
       },
@@ -435,9 +431,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Personnel_Name: 'นาย โปร แก้ได้หมด',
           Tax_ID: '1234567890123',
         },
-        Reference: {
-          Number: 'PO-CABLE-2025-01',
-        },
+        Reference_List: [{ Number: 'PO-CABLE-2025-01' }],
         Remarks: undefined,
         Tax: 0.07,
       },
@@ -497,7 +491,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Personnel_Name: 'นาย โปร แก้ได้หมด',
           Tax_ID: '1234567890123',
         },
-        Reference: null,
+        Reference_List: null,
         Remarks: 'ฟรีทดสอบพิมพ์หน้าแรก “สวัสดีออฟฟิศใหม่”',
         Tax: 0.07,
         Actions_Data: {
@@ -514,7 +508,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
                 Tax: 0.07,
                 Credit_Term: null,
                 Remarks: '### หมายเหตุ\nฟรีทดสอบพิมพ์หน้าแรก “สวัสดีออฟฟิศใหม่”',
-                Reference: { Number: 'QT-2025-0088' },
+                Reference_List: [{ Number: 'QT-2025-0088' }],
               },
               items: {
                 table: 'Items',
@@ -603,7 +597,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Personnel_Name: 'นาย โปร แก้ได้หมด',
           Tax_ID: '1234567890123',
         },
-        Reference: { Number: 'TKT-GIT-9001' },
+        Reference_List: [{ Number: 'TKT-GIT-9001' }],
         Remarks: 'หลัง merge แนะนำให้กอด repo เบา ๆ',
         Tax: 0.07,
       },
@@ -664,7 +658,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Personnel_Name: 'นาย โปร แก้ได้หมด',
           Tax_ID: '1234567890123',
         },
-        Reference: { Number: 'PO-DRY-2025-02' },
+        Reference_List: [{ Number: 'PO-DRY-2025-02' }],
         Remarks: 'โปรดอย่าใช้งานเครื่องในขณะกำลังไดร์นะครับ',
         Tax: 0,
       },
@@ -725,7 +719,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Personnel_Name: 'นาย โปร แก้ได้หมด',
           Tax_ID: '1234567890123',
         },
-        Reference: { Number: 'JOB-ONCALL-001' },
+        Reference_List: [{ Number: 'JOB-ONCALL-001' }],
         Remarks: 'ทำระบบกลับมาเสิร์ฟปลาเผาได้ทันมื้อเย็น',
         Tax: 0.07,
       },
@@ -786,7 +780,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Personnel_Name: 'นาย โปร แก้ได้หมด',
           Tax_ID: '1234567890123',
         },
-        Reference: null,
+        Reference_List: null,
         Remarks: 'เน้นลงมือทำ ไม่เน้นสไลด์ยาว ๆ',
         Tax: 0,
       },
@@ -1044,7 +1038,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
             },
           ],
         },
-        Reference: null,
+        Reference_List: null,
         Remarks: 'ของแถมทั้งหมดรวมในสัญญาซื้อขาย และไม่มีผลต่อยอดรวมสินค้า',
         Tax: 0,
         Actions_Data: {
@@ -1061,7 +1055,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
                 Tax: 0,
                 Credit_Term: null,
                 Remarks: '### หมายเหตุ\nเน้นลงมือทำ ไม่เน้นสไลด์ยาว ๆ',
-                Reference: { Number: 'QT-2025-0101' },
+                Reference_List: [{ Number: 'QT-2025-0101' }],
               },
               items: {
                 table: 'Items',
@@ -1121,7 +1115,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Personnel_Name: 'นาย โปร แก้ได้หมด',
           Tax_ID: '1234567890123',
         },
-        Reference: null,
+        Reference_List: null,
         Remarks: 'ตัวอย่างเอกสารที่มีลิงก์ดาวน์โหลดไฟล์ที่ลงชื่อแล้ว',
         Tax: 0,
         Signed_Document_URL: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
@@ -1169,9 +1163,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Personnel_Name: 'นาย โปร แก้ได้หมด',
           Tax_ID: '1234567890123',
         },
-        Reference: {
-          Number: 'RCPT-2025-0001',
-        },
+        Reference_List: [{ Number: 'RCPT-2025-0001' }],
         Remarks:
           'ใบลดหนี้นี้ออกเพื่อลดมูลค่าตามใบเสร็จ RCPT-2025-0001\n\n> ยอดที่คืนจะโอนกลับภายใน 5 วันทำการ',
         Tax: 0.07,
@@ -1219,9 +1211,7 @@ export const scenarios: { title: string; slug: string; data: GristRecord }[] = [
           Personnel_Name: 'นาย โปร แก้ได้หมด',
           Tax_ID: '1234567890123',
         },
-        Reference: {
-          Number: 'RCPT-2025-0001',
-        },
+        Reference_List: [{ Number: 'RCPT-2025-0001' }],
         Remarks:
           'ใบเพิ่มหนี้นี้ออกเพื่อเรียกเก็บส่วนต่างจากงานนอกขอบเขตตามที่ตกลงเพิ่มเติม\n\n> กรุณาชำระยอดเพิ่มภายใน 7 วันทำการ',
         Tax: 0.07,

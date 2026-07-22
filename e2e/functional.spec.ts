@@ -57,7 +57,7 @@ test.describe('Grist Widget Functionality', () => {
           Tax_ID: '9876543210987',
           id: 1,
         },
-        Reference: { Number: 'REF-001', id: 1 },
+        Reference_List: [{ Number: 'REF-001' }],
         Remarks: 'Test remarks',
         Tax: 0.07,
         id: 999,

@@ -5,7 +5,6 @@ import type {
   TaxInfo,
   PaymentInfo,
   BankInfo,
-  ReferenceInfo,
 } from '../types/view-model'
 import { calculateSubtotal, sortItems } from './document'
 import { getTaxInfo } from './tax'
@@ -64,10 +63,8 @@ export function getViewModel(record: GristRecord): DocumentViewModel {
     bankDetails,
   }
 
-  // Transform reference info
-  const reference: ReferenceInfo = {
-    number: record.Record.Reference?.Number ?? null,
-  }
+  // Transform reference list into display values
+  const referenceNumbers = record.Record.Reference_List?.map((reference) => reference.Number) ?? []
 
   // Get credit term
   const creditTerm = record.Record.Credit_Term ?? null
@@ -82,7 +79,7 @@ export function getViewModel(record: GristRecord): DocumentViewModel {
     tax,
     total,
     paymentInfo,
-    reference,
+    referenceNumbers,
     creditTerm,
     remarks,
   }

@@ -91,11 +91,11 @@ export const DocumentTypeSchema = z.object({
   Thai_Name: z.string().nullish(),
 })
 
-export const ReferenceSchema = z
-  .object({
-    Number: z.string(),
-  })
-  .nullish()
+export const ReferenceSchema = z.object({
+  Number: z.string(),
+})
+
+export const ReferenceListSchema = z.array(ReferenceSchema).nullish()
 
 export const PaymentRecordSchema = z.object({
   Amount: z.number(),
@@ -148,7 +148,7 @@ export const RecordDataSchema = z.object({
   Payment_Method: PaymentMethodSchema.nullish(),
   Payments: z.array(PaymentRecordSchema).nullish(),
   Provider: ProviderSchema,
-  Reference: ReferenceSchema,
+  Reference_List: ReferenceListSchema,
   Remarks: z.string().nullish(),
   Tax: z.number(),
   Signed_Document_URL: z.union([z.url(), z.literal('')]).nullish(),
@@ -184,6 +184,7 @@ export type Vehicle = z.infer<typeof VehicleSchema>
 export type DocumentTypeName = z.infer<typeof DocumentTypeNameSchema>
 export type DocumentType = z.infer<typeof DocumentTypeSchema>
 export type Reference = z.infer<typeof ReferenceSchema>
+export type ReferenceList = z.infer<typeof ReferenceListSchema>
 export type PaymentTypeName = z.infer<typeof PaymentTypeNameSchema>
 export type PaymentType = z.infer<typeof PaymentTypeSchema>
 export type PaymentRecord = z.infer<typeof PaymentRecordSchema>

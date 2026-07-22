@@ -35,8 +35,12 @@
       <div class="document-header__details">
         <div class="document-header__number">เลขที่: {{ record.Record.Number }}</div>
         <div class="document-header__date">วันที่: {{ formatDate(record.Record.Date) }}</div>
-        <div v-if="viewModel.reference.number" class="document-header__reference">
-          อ้างอิง: {{ viewModel.reference.number }}
+        <div
+          v-if="viewModel.referenceNumbers.length"
+          class="document-header__reference"
+          data-testid="document-reference-list"
+        >
+          อ้างอิง: {{ viewModel.referenceNumbers.join(', ') }}
         </div>
         <div v-if="viewModel.creditTerm" class="document-header__credit-term">
           เครดิต: {{ viewModel.creditTerm }}

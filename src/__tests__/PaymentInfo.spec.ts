@@ -42,7 +42,7 @@ function createRecord(id: number, bankName: string, promptPay: string): GristRec
         Personnel_Name: 'Test Provider',
         Tax_ID: '9876543210987',
       },
-      Reference: null,
+      Reference_List: null,
       Remarks: null,
       Signed_Document_URL: '',
       Tax: 0.07,

@@ -227,7 +227,7 @@ class MockGristAPI implements GristAPI {
           Tax_ID: '8888888888888',
           id: 2,
         },
-        Reference: { Number: 'REF-001', id: 1 },
+        Reference_List: [{ Number: 'REF-001' }],
         Remarks:
           'เอกสารนี้เป็น **ตัวอย่าง** สำหรับการทดสอบระบบ\n\n- กรุณาตรวจสอบข้อมูลก่อนชำระเงิน\n- `TEST001` คือรหัสสินค้าทดสอบ\n- สินค้าจะจัดส่งภายใน 7 วัน',
         Tax: 0.07,
